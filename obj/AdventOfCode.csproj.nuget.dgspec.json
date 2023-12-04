@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ben/Code/dotnet/AdventOfCode/AdventOfCode.csproj": {}
+    "C:\\Users\\beskildsen\\source\\repos\\AdventofCode\\AdventOfCode.csproj": {}
   },
   "projects": {
-    "/Users/ben/Code/dotnet/AdventOfCode/AdventOfCode.csproj": {
+    "C:\\Users\\beskildsen\\source\\repos\\AdventofCode\\AdventOfCode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ben/Code/dotnet/AdventOfCode/AdventOfCode.csproj",
+        "projectUniqueName": "C:\\Users\\beskildsen\\source\\repos\\AdventofCode\\AdventOfCode.csproj",
         "projectName": "AdventOfCode",
-        "projectPath": "/Users/ben/Code/dotnet/AdventOfCode/AdventOfCode.csproj",
-        "packagesPath": "/Users/ben/.nuget/packages/",
-        "outputPath": "/Users/ben/Code/dotnet/AdventOfCode/obj/",
+        "projectPath": "C:\\Users\\beskildsen\\source\\repos\\AdventofCode\\AdventOfCode.csproj",
+        "packagesPath": "C:\\Users\\beskildsen\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\beskildsen\\source\\repos\\AdventofCode\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ben/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\beskildsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
