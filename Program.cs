@@ -1,4 +1,4 @@
-﻿global using Console = System.Diagnostics.Debug;
+﻿// global using Console = System.Diagnostics.Debug;
 
 internal class Program
 {
