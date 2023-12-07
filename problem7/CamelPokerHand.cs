@@ -76,12 +76,7 @@ class CamelPokerHand : IComparable<CamelPokerHand>
         }
         while (numJokers > 0)
         {
-            var maxC = cardDict.Aggregate((x, y) =>
-            {
-                if (x.Key == 'J') return y;
-                if (y.Key == 'J') return x;
-                return x.Value > y.Value ? x : y;
-            }).Key;
+            var maxC = cardDict.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
             cardDict[maxC]++;
             numJokers--;
         }
