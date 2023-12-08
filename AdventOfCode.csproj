@@ -24,6 +24,8 @@
     <None Remove="problem6\testinput.txt" />
     <None Remove="problem7\input.txt" />
     <None Remove="problem7\testinput.txt" />
+    <None Remove="problem8\input.txt" />
+    <None Remove="problem8\testinput.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +72,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="problem7\testinput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="problem8\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="problem8\testinput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
