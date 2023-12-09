@@ -10,7 +10,7 @@ class Problem8
         List<int> periods = [];
         List<bool> done = [];
 
-        foreach (string line in File.ReadAllLines("problem8/input.txt"))
+        foreach (string line in File.ReadAllLines("problem8/testinput.txt"))
         {
             if (indices.Count == 0)
             {

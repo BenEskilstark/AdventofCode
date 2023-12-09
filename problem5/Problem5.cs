@@ -7,7 +7,7 @@ class Problem5
     {
         var seeds = new List<(long, long)>();
         var maps = new List<Dictionary<long, (long, long)>>();
-        foreach (string line in File.ReadAllLines("problem5/input.txt"))
+        foreach (string line in File.ReadAllLines("problem5/testinput.txt"))
         {
             if (seeds.Count == 0) seeds = ParseSeeds2(line);
             if (Regex.IsMatch(line, @"^\D+-to-\D\D+ map:")) maps.Insert(0, []);

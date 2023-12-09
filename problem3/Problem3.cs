@@ -10,7 +10,7 @@ class Problem3
         var neiDict = new Dictionary<string, List<int>>();
 
         var y = 0;
-        foreach (string line in File.ReadAllLines("problem3/input.txt"))
+        foreach (string line in File.ReadAllLines("problem3/testinput.txt"))
         {
             Regex.Matches(line, @"\d+").ToList().ForEach(m =>
             {

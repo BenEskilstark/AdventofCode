@@ -3,7 +3,7 @@ class Problem2 {
         var sumOfPowers = 0;
         List<string> colors = ["red", "green", "blue"];
 
-        foreach (string line in File.ReadAllLines("problem2/input.txt"))
+        foreach (string line in File.ReadAllLines("problem2/testinput.txt"))
         {
             var gameIndex = int.Parse(line.Split(":")[0].Split(" ")[1]);
             var gameStrs = line.Split(":")[1].Split(";");

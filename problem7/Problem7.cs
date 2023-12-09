@@ -3,7 +3,7 @@ class Problem7
     public static void Solve()
     {
         List<CamelPokerHand> hands = [];
-        foreach (string line in File.ReadAllLines("problem7/input.txt"))
+        foreach (string line in File.ReadAllLines("problem7/testinput.txt"))
         {
             hands.Add(new CamelPokerHand(
                 line.Split(" ")[0],

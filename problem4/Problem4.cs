@@ -9,7 +9,7 @@ class Problem4
 
         var sum = 0;
         var i = 0;
-        foreach (string line in File.ReadAllLines("problem4/input.txt"))
+        foreach (string line in File.ReadAllLines("problem4/testinput.txt"))
         {
             i++;
             var winningNumbers = line.Split(":")[1].Split("|")[0].Trim().Split(" ")

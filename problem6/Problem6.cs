@@ -4,7 +4,7 @@ class Problem6
 {
     public static void Solve()
     {
-        var file = "problem6/input.txt";
+        var file = "problem6/testinput.txt";
 
         List<long> times = [];
         List<long> dists = [];
