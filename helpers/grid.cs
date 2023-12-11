@@ -1,17 +1,18 @@
 using System.Xml.Linq;
 
-public class Grid10<T>
+
+public class Grid<T>
 {
     public List<List<T>> Matrix { get; set; }
     public T Default { get; set; }
 
-    public Grid10(List<List<T>> G, T D)
+    public Grid(List<List<T>> G, T D)
     {
         this.Matrix = G;
         this.Default = D;
     }
 
-    public T At(Coord10 Pos)
+    public T At((int X, int Y) Pos)
     {
         try
         {
@@ -23,12 +24,12 @@ public class Grid10<T>
         }
     }
 
-    public void Set(Coord10 Pos, T Value)
+    public void Set((int X, int Y) Pos, T Value)
     {
         Matrix[Pos.Y][Pos.X] = Value;
     }
 
-    public Grid10<T> Map(Func<Coord10, T> F)
+    public Grid<T> Map(Func<(int X, int Y), T> F)
     {
         List<List<T>> g = [];
         for (int y = 0; y < Matrix.Count; y++)
@@ -37,33 +38,33 @@ public class Grid10<T>
             List<T> newRow = [];
             for (int x = 0; x < row.Count; x++)
             {
-                newRow.Add(F(new Coord10(x, y)));
+                newRow.Add(F((x, y)));
             }
             g.Add(newRow);
         }
         // G = g;
-        return new Grid10<T>(g, this.Default);
+        return new Grid<T>(g, this.Default);
     }
 
-    public Grid10<T> ForEach(Action<Coord10, T> F)
+    public Grid<T> ForEach(Action<(int X, int Y), T> F)
     {
         for (int y = 0; y < Matrix.Count; y++)
         {
             List<T> row = Matrix[y];
             for (int x = 0; x < row.Count; x++)
             {
-                F(new Coord10(x, y), Matrix[y][x]);
+                F((x, y), Matrix[y][x]);
             }
         }
         return this;
     }
 
-    public Grid10<T> Copy()
+    public Grid<T> Copy()
     {
         return this.Map(this.At);
     }
 
-    public Grid10<T> Flip()
+    public Grid<T> Flip()
     {
         List<List<T>> newLists = [];
         for (int x = 0; x < Matrix[0].Count; x++)
@@ -75,7 +76,7 @@ public class Grid10<T>
             }
             newLists.Add(row);
         }
-        Grid10<T> newGrid = new Grid10<T>(newLists, this.Default);
+        Grid<T> newGrid = new Grid<T>(newLists, this.Default);
 
         for (int y = 0; y < Matrix.Count; y++)
         {
@@ -106,25 +107,4 @@ public class Grid10<T>
         }
     }
 
-}
-
-public class Coord10
-{
-    public int X { get; set; }
-    public int Y { get; set; }
-    public Coord10(int X, int Y)
-    {
-        this.X = X;
-        this.Y = Y;
-    }
-
-    public bool Equals(Coord10 other)
-    {
-        return other.X == this.X && other.Y == this.Y;
-    }
-
-    public override string ToString()
-    {
-        return "(" + this.X + ", " + this.Y + ")";
-    }
 }

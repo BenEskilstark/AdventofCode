@@ -4,6 +4,6 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Problem10.Solve();
+        Problem11.Solve();
     }
 }
