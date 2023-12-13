@@ -12,6 +12,9 @@
     <None Remove="2021\problem1\input.txt" />
     <None Remove="2021\problem1\testinput.txt" />
 
+    <None Remove="2022\problem1\input.txt" />
+    <None Remove="2022\problem1\testinput.txt" />
+
     <None Remove="2023\problem1\input1.txt" />
     <None Remove="2023\problem1\input2.txt" />
     <None Remove="2023\problem1\input3.txt" />
@@ -42,6 +45,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="2021\problem1\testinput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="2022\problem1\input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="2022\problem1\testinput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
 

@@ -1,7 +1,7 @@
 ﻿// global using Console = System.Diagnostics.Debug;
 
 using System.Diagnostics;
-using CurrentYear = Year2021;
+using CurrentYear = Year2022;
 
 internal class Program
 {
