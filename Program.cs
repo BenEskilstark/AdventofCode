@@ -8,7 +8,7 @@ internal class Program
     {
         Stopwatch timer = new Stopwatch();
         timer.Start();
-        Problem12.SolvePt2();
+        Problem13.Solve();
         timer.Stop();
         // Format and display the TimeSpan value.
         TimeSpan ts = timer.Elapsed;
