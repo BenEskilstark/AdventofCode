@@ -12,6 +12,35 @@ public class Grid<T>
         this.Default = D;
     }
 
+    public List<T> GetRow(int Index)
+    {
+        return this.Matrix[Index];
+    }
+
+    public void SetRow(int Index, List<T> Row)
+    {
+        this.Matrix[Index] = Row;
+    }
+
+    public List<T> GetCol(int Index)
+    {
+        List<T> col = [];
+        Console.WriteLine(this.Matrix[0].Count);
+        for (int i = 0; i < this.Matrix.Count; i++)
+        {
+            col.Add(this.Matrix[i][Index]);
+        }
+        return col;
+    }
+
+    public void SetCol(int Index, List<T> values)
+    {
+        for (int i = 0; i < this.Matrix.Count; i++)
+        {
+            this.Matrix[i][Index] = values[i];
+        }
+    }
+
     public T At((int X, int Y) Pos)
     {
         try
@@ -64,7 +93,7 @@ public class Grid<T>
         return this.Map(this.At);
     }
 
-    public Grid<T> Flip()
+    public Grid<T> Pivot()
     {
         List<List<T>> newLists = [];
         for (int x = 0; x < Matrix[0].Count; x++)

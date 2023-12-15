@@ -12,7 +12,7 @@ public class Problem11
         // data = ExpandRows(data.Flip()).Flip();
 
         List<int> emptyRows = GetEmptyRows(data);
-        List<int> emptyCols = GetEmptyRows(data.Flip());
+        List<int> emptyCols = GetEmptyRows(data.Pivot());
 
         List<(int X, int Y)> galaxies = [];
         data.ForEach((pos, c) =>

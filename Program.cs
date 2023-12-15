@@ -7,10 +7,11 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Stopwatch timer = new Stopwatch();
+        Stopwatch timer = new();
         timer.Start();
-        CurrentYear.Problem14.Solve();
+        CurrentYear.Problem16.Solve();
         timer.Stop();
+
         // Format and display the TimeSpan value.
         TimeSpan ts = timer.Elapsed;
         string elapsedTime = String.Format("{0:00}hr {1:00}:{2:00}.{3:000}",

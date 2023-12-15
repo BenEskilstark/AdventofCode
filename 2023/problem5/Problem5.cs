@@ -1,13 +1,15 @@
 using System.Data;
 using System.Text.RegularExpressions;
 
+namespace Year2023;
+
 class Problem5
 {
     public static void Solve()
     {
         var seeds = new List<(long, long)>();
         var maps = new List<Dictionary<long, (long, long)>>();
-        foreach (string line in File.ReadAllLines("problem5/testinput.txt"))
+        foreach (string line in File.ReadAllLines("2023/problem5/input.txt"))
         {
             if (seeds.Count == 0) seeds = ParseSeeds2(line);
             if (Regex.IsMatch(line, @"^\D+-to-\D\D+ map:")) maps.Insert(0, []);

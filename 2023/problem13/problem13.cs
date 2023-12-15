@@ -19,7 +19,7 @@ public class Problem13
 
             if (!isVertical)
             {
-                grid = new Grid<char>(grid, '?').Flip().Matrix;
+                grid = new Grid<char>(grid, '?').Pivot().Matrix;
                 pivotPoint = GetReflection(grid);
                 sum += (pivotPoint + 1) * 100;
             }

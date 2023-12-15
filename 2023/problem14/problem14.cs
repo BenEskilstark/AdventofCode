@@ -58,7 +58,7 @@ public class TiltBoard
 
     public void TiltNorth()
     {
-        Grid<char> board = this.Board.Flip();
+        Grid<char> board = this.Board.Pivot();
 
         List<List<char>> nextBoardInput = [];
         foreach (List<char> row in board.Matrix)
@@ -67,12 +67,12 @@ public class TiltBoard
         }
         board.Matrix = nextBoardInput;
 
-        board = board.Flip();
+        board = board.Pivot();
         this.Board = board;
     }
     public void TiltSouth()
     {
-        Grid<char> board = this.Board.Flip();
+        Grid<char> board = this.Board.Pivot();
 
         List<List<char>> nextBoardInput = [];
         foreach (List<char> row in board.Matrix)
@@ -84,7 +84,7 @@ public class TiltBoard
         }
         board.Matrix = nextBoardInput;
 
-        board = board.Flip();
+        board = board.Pivot();
         this.Board = board;
     }
     public void TiltWest()
