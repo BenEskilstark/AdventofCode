@@ -6,10 +6,15 @@ public class Grid<T>
     public List<List<T>> Matrix { get; set; }
     public T Default { get; set; }
 
+    public int Width { get; }
+    public int Height { get; }
+
     public Grid(List<List<T>> G, T D)
     {
         this.Matrix = G;
         this.Default = D;
+        this.Width = G[0].Count;
+        this.Height = G.Count;
     }
 
     public List<T> GetRow(int Index)
