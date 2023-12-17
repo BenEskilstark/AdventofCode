@@ -9,7 +9,7 @@ internal class Program
     {
         Stopwatch timer = new();
         timer.Start();
-        CurrentYear.Problem16.Solve();
+        CurrentYear.Problem18.Solve();
         timer.Stop();
 
         // Format and display the TimeSpan value.
