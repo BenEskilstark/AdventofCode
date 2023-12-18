@@ -125,13 +125,10 @@ public class Grid<T>
     public void Print()
     {
         Console.WriteLine(this.ToString());
-        foreach (List<T> row in Matrix)
-        {
-            Console.WriteLine(string.Join("", row));
-        }
     }
 
-    public override string ToString() {
+    public override string ToString()
+    {
         string str = "";
         foreach (List<T> row in Matrix)
         {
