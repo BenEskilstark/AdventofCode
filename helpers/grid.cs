@@ -139,12 +139,10 @@ public class Grid<T>
 
     public void Save(string Path)
     {
-        using (StreamWriter writer = new StreamWriter(Path))
+        using StreamWriter writer = new(Path);
+        foreach (List<T> row in Matrix)
         {
-            foreach (List<T> row in Matrix)
-            {
-                writer.WriteLine(string.Join("", row));
-            }
+            writer.WriteLine(string.Join("", row));
         }
     }
 
