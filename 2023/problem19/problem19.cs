@@ -7,6 +7,7 @@ namespace Year2023;
 /*@
     TODO:
         - Implement InvertRange (AndRanges might be broken)
+        - Implement OrRange
         - Recursion algo:
             - walk down the children
                 - Invert the previous rule and "And" it with the current rule
@@ -190,7 +191,7 @@ public class Rule
     {
         List<Range> inv = [];
 
-
+        return inv;
     }
 }
 
