@@ -1,8 +1,20 @@
 using System.Data;
 using System.Reflection.Emit;
-using Range = (char Cat, int Min, int Max); // LOWER bound exclusive
+using Range = (char Cat, int Min, int Max); // Upper bound exclusive
 
 namespace Year2023;
+
+/*@
+    TODO:
+        - Implement InvertRange (AndRanges might be broken)
+        - Recursion algo:
+            - walk down the children
+                - Invert the previous rule and "And" it with the current rule
+                - "And" the current rule with the result of recursively evaluating the child
+                - if it is A or R, then just use that range
+                - if it is a direct link then just recurse into that one
+                - range that results in from all these Ands is the answer
+@*/
 
 public class Problem19
 {
@@ -49,15 +61,66 @@ public class Problem19
         // Console.WriteLine(sum);
 
         // Part 2:
-        Stack<WTree> stack = [];
-        stack.Push(wTrees["in"]);
-        while (stack.TryPop(out WTree? tree))
-        {
-        }
+        Console.WriteLine(wTrees["in"].ComputeChildRanges(wTrees));
     }
 
 
 }
+
+
+public class WTree
+{
+    public string Label { get; }
+    public Dictionary<string, Rule> Children = [];
+    public List<Rule> Rules { get; set; } = [];
+    public bool Computed { get; set; } = false;
+
+    public WTree(string Line)
+    {
+        this.Label = Line.Split('{')[0];
+        List<string> rules = [.. Line.Split('{')[1][..^1].Split(',')];
+        foreach (string rule in rules)
+        {
+            if (rule == "A" || rule == "R" || !rule.Contains(':'))
+            {
+                this.Children[rule] = Rule.LeafRule(rule);
+                continue;
+            }
+            char category = rule[0];
+            string label = rule.Split(':')[1];
+            int value = int.Parse(rule.Split(':')[0][2..]);
+            this.Children[label] = new(category, rule[1] == '<', value, label);
+        }
+    }
+
+    public override string ToString()
+    {
+        return string.Join(";", this.Rules);
+    }
+
+    public List<Range> ComputeChildRanges(Dictionary<string, WTree> Dict)
+    {
+        List<Range> ranges = Rule.FullRange();
+        foreach (var child in this.Children.ToList())
+        {
+            Rule rule = child.Value;
+            if (child.Key == "A" || child.Key == "R")
+            {
+                ranges = Rule.AndRanges(ranges, rule.Ranges);
+            }
+            else if (rule.Cat != '?')
+            {
+
+            }
+        }
+        return ranges;
+    }
+}
+
+
+
+
+
 
 public class Rule
 {
@@ -74,20 +137,31 @@ public class Rule
         this.Value = Value;
         this.Child = Child;
         this.Ranges = Rule.FullRange();
-        for (int i = 0; i < this.Ranges.Count; i++)
+        if (Child == "R" && Cat == '?')
         {
-            Range range = this.Ranges[i];
+            this.Ranges = Rule.EmptyRange();
+            return;
+        };
+
+        this.Ranges = this.Ranges.Select((Range range) =>
+        {
             if (range.Cat == Cat)
             {
-                if (LessThan) range.Max = Value - 1;
-                if (!LessThan) range.Min = Value;
+                if (LessThan) return (Cat, range.Min, Value);
+                if (!LessThan) return (Cat, Value + 1, range.Max);
             }
-        }
+            return range;
+        }).ToList();
+    }
+
+    public override string ToString()
+    {
+        return this.Child + " " + string.Join(' ', this.Ranges);
     }
 
     public static List<Range> FullRange()
     {
-        return [('x', 0, 4000), ('m', 0, 4000), ('a', 0, 4000), ('s', 0, 4000)];
+        return [('x', 1, 4001), ('m', 1, 4001), ('a', 1, 4001), ('s', 1, 4001)];
     }
 
     public static List<Range> EmptyRange()
@@ -99,32 +173,24 @@ public class Rule
     {
         return new('?', false, -1, Label);
     }
-}
 
-public class WTree
-{
-    public string Label { get; }
-    public HashSet<string> Children = [];
-    public List<Rule> Rules = [];
-
-    public WTree(string Line)
+    public static List<Range> AndRanges(List<Range> A, List<Range> B)
     {
-        this.Label = Line.Split('{')[0];
-        List<string> rules = [.. Line.Split('{')[1][..^1].Split(',')];
-        foreach (string rule in rules)
+        List<Range> combo = [];
+        for (int i = 0; i < A.Count; i++)
         {
-            if (rule == "A" || rule == "R" || !rule.Contains(':'))
-            {
-                this.Children.Add(rule);
-                this.Rules.Add(Rule.LeafRule(rule));
-                continue;
-            }
-            char category = rule[0];
-            string label = rule.Split(':')[1];
-            int value = int.Parse(rule.Split(':')[0][2..]);
-            this.Children.Add(label);
-            this.Rules.Add(new(category, rule[1] == '<', value, label));
+            Range r = (A[i].Cat, Math.Max(A[i].Min, B[i].Min), Math.Min(A[i].Max, B[i].Max));
+            if (r.Min >= r.Max) r = (A[i].Cat, 0, 0);
+            combo.Add(r);
         }
+        return combo;
+    }
+
+    public static List<Range> InvertRanges(List<Range> ranges)
+    {
+        List<Range> inv = [];
+
+
     }
 }
 
