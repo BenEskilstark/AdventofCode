@@ -4,6 +4,6 @@ public class Problem25
 {
     public static void Solve()
     {
-        // string file = "2023/problem20/testinput.txt";
+        // string file = "2023/problem25/testinput.txt";
     }
 }

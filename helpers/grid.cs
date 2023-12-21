@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 
+using Coord = (int X, int Y);
 
 public class Grid<T>
 {
@@ -46,7 +47,7 @@ public class Grid<T>
         }
     }
 
-    public T At((int X, int Y) Pos)
+    public T At(Coord Pos)
     {
         try
         {
@@ -58,12 +59,12 @@ public class Grid<T>
         }
     }
 
-    public void Set((int X, int Y) Pos, T Value)
+    public void Set(Coord Pos, T Value)
     {
         Matrix[Pos.Y][Pos.X] = Value;
     }
 
-    public Grid<T> Map(Func<(int X, int Y), T> F)
+    public Grid<T> Map(Func<Coord, T> F)
     {
         List<List<T>> g = [];
         for (int y = 0; y < Matrix.Count; y++)
@@ -80,7 +81,7 @@ public class Grid<T>
         return new Grid<T>(g, this.Default);
     }
 
-    public Grid<T> ForEach(Action<(int X, int Y), T> F)
+    public Grid<T> ForEach(Action<Coord, T> F)
     {
         for (int y = 0; y < Matrix.Count; y++)
         {
@@ -96,6 +97,17 @@ public class Grid<T>
     public Grid<T> Copy()
     {
         return this.Map(this.At);
+    }
+
+    public List<Coord> GetNeighbors(Coord coord)
+    {
+        List<Coord> neighbors = [];
+        if (coord.X > 0) neighbors.Add((X: coord.X - 1, coord.Y));
+        if (coord.X < Width - 1) neighbors.Add((X: coord.X + 1, coord.Y));
+        if (coord.Y > 0) neighbors.Add((coord.X, Y: coord.Y - 1));
+        if (coord.Y < Height - 1) neighbors.Add((coord.X, Y: coord.Y + 1));
+
+        return neighbors;
     }
 
     public Grid<T> Pivot()
