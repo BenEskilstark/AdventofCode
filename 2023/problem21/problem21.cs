@@ -20,20 +20,29 @@ public class Problem21
 
     public static void Part2(Grid<char> grid)
     {
-        long numSteps = 22;
-        VecStep start = (grid.Width / 2, grid.Height / 2, 0);
-        (long, long) square = ComputeSteps(grid, [start], grid.Width * grid.Height);
-        Console.WriteLine(square.Item1 + " " + square.Item2);
+        Dictionary<int, int> expected = new() { [11] = 103, [16] = 216, [22] = 387, [27] = 588 }; // [33] = 853, [38] = 1142, [44] = 1501, [49] = 1878 };
 
+        foreach (var pair in expected)
+        {
+            Console.WriteLine("---------");
+            long numSteps = pair.Key;
+            Console.WriteLine("Num Steps: " + numSteps);
+            VecStep start = (grid.Width / 2, grid.Height / 2, 0);
+            (long, long) square = ComputeSteps(grid, [start], grid.Width * grid.Height);
+            // Console.WriteLine(square.Item1 + " " + square.Item2);
 
-        Console.WriteLine(GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps));
-        Console.WriteLine(GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps) + GetOuterTotal(grid, numSteps));
+            // Console.WriteLine("inner square: " + GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps));
+            long res = GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps) + GetOuterTotal(grid, numSteps);
+            Console.WriteLine("got: " + res + " expected: " + pair.Value);
+        }
+
     }
 
     public static long GetInnerTotal(List<long> square, int width, long numSteps)
     {
         long size = (numSteps / width);
-        int evenOddIndex = (int)numSteps % 2;
+        int evenOddIndex = (int)size % 2;
+        Console.WriteLine(evenOddIndex);
         long total = square[evenOddIndex];
         for (int s = 1; s <= size; s++)
         {
@@ -57,23 +66,34 @@ public class Problem21
         VecStep startRight = (0, grid.Height / 2, 0);
         (long, long) right = ComputeSteps(grid, [startRight], pointSteps);
 
-        int edgeSteps = (int)((steps - grid.Width) + steps % grid.Width);
-        edgeSteps = pointSteps;
+        Console.WriteLine(bot.Item2);
+
+        int edgeSteps = pointSteps;
         Console.WriteLine("edge steps: " + edgeSteps);
         (long, long) topRight = ComputeSteps(grid, [startTop, startRight], edgeSteps);
         (long, long) topLeft = ComputeSteps(grid, [startTop, startLeft], edgeSteps);
         (long, long) botRight = ComputeSteps(grid, [startBot, startRight], edgeSteps);
         (long, long) botLeft = ComputeSteps(grid, [startBot, startLeft], edgeSteps);
 
-        long pointTotal = top.Item2 + bot.Item2 + left.Item2 + right.Item2;
-        List<long> edgeTotals = [topRight.Item2, topLeft.Item2, botRight.Item2, botLeft.Item2];
+        int cornerSteps = (int)((steps - grid.Width) % grid.Width);
+        Console.WriteLine("cornerSteps: " + cornerSteps);
+        (long, long) cTopRight = ComputeSteps(grid, [(grid.Width - 1, grid.Height - 1, 0)], cornerSteps);
+        (long, long) cTopLeft = ComputeSteps(grid, [(0, grid.Height - 1, 0)], cornerSteps);
+        (long, long) cBotRight = ComputeSteps(grid, [(0, 0, 0)], cornerSteps);
+        (long, long) cBotLeft = ComputeSteps(grid, [(grid.Width - 1, 0, 0)], cornerSteps);
+
+        long pointTotal = top.Item1 + bot.Item1 + left.Item1 + right.Item1;
+        long edgeTotal = new List<long>([topRight.Item1, topLeft.Item1, botRight.Item1, botLeft.Item1]).Aggregate((a, b) => a + b);
+        long cornerTotal = new List<long>([cTopRight.Item1, cTopLeft.Item1, cBotRight.Item1, cBotLeft.Item1]).Aggregate((a, b) => a + b);
         long m = (steps / grid.Width) - 1;
+        long n = m + 1;
         Console.WriteLine("m: " + m);
-        return pointTotal + m * edgeTotals[0] + m * edgeTotals[1] + m * edgeTotals[2] + m * edgeTotals[3];
+        return pointTotal + m * edgeTotal + n * cornerTotal;
     }
 
     public static (long, long) ComputeSteps(Grid<char> grid, List<VecStep> starts, int maxSteps)
     {
+        if (maxSteps <= 1) return (0, 0); // HACK
         long evenPlots = 0;
         long oddPlots = 0;
         Queue<VecStep> visiting = new(starts);
@@ -82,7 +102,7 @@ public class Problem21
         {
             if (step.Steps % 2 == 0) evenPlots++;
             if (step.Steps % 2 == 1) oddPlots++;
-            if (step.Steps > maxSteps) continue;
+            if (step.Steps >= maxSteps) continue;
             List<VecStep> neighbors = grid.GetNeighbors((step.X, step.Y))
                 .Where(p => grid.At(p) != '#' && !visited.Contains(p))
                 .Select(p => (p.X, p.Y, step.Steps + 1))
