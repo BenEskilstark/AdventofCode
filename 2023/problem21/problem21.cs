@@ -10,7 +10,7 @@ public class Problem21
 {
     public static void Solve()
     {
-        string file = "2023/problem21/testinput.txt";
+        string file = "2023/problem21/input.txt";
         List<List<char>> chars = [.. File.ReadAllLines(file).Select(line => line.ToCharArray().ToList())];
         Grid<char> grid = new(chars, '?');
 
@@ -20,8 +20,8 @@ public class Problem21
 
     public static void Part2(Grid<char> grid)
     {
-        Dictionary<int, int> expected = new() { [11] = 103, [16] = 216, [22] = 387, [27] = 588 }; // [33] = 853, [38] = 1142, [44] = 1501, [49] = 1878 };
-
+        // Dictionary<int, int> expected = new() { [11] = 103, [16] = 216, [22] = 387, [27] = 588, [33] = 853, [38] = 1142, [44] = 1501, [49] = 1878 };
+        Dictionary<int, int> expected = new() { [26501365] = 0 };
         foreach (var pair in expected)
         {
             Console.WriteLine("---------");
@@ -29,7 +29,7 @@ public class Problem21
             Console.WriteLine("Num Steps: " + numSteps);
             VecStep start = (grid.Width / 2, grid.Height / 2, 0);
             (long, long) square = ComputeSteps(grid, [start], grid.Width * grid.Height);
-            // Console.WriteLine(square.Item1 + " " + square.Item2);
+            Console.WriteLine(square.Item1 + " " + square.Item2);
 
             // Console.WriteLine("inner square: " + GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps));
             long res = GetInnerTotal([square.Item1, square.Item2], grid.Width, numSteps) + GetOuterTotal(grid, numSteps);
@@ -42,7 +42,11 @@ public class Problem21
     {
         long size = (numSteps / width);
         int evenOddIndex = (int)size % 2;
-        Console.WriteLine(evenOddIndex);
+        if (numSteps % width != 0)
+        {
+            evenOddIndex = (int)(size + 1) % 2;
+        }
+        Console.WriteLine("even or odd center? " + evenOddIndex);
         long total = square[evenOddIndex];
         for (int s = 1; s <= size; s++)
         {
@@ -66,7 +70,10 @@ public class Problem21
         VecStep startRight = (0, grid.Height / 2, 0);
         (long, long) right = ComputeSteps(grid, [startRight], pointSteps);
 
-        Console.WriteLine(bot.Item2);
+        Console.WriteLine("top point: " + top);
+        Console.WriteLine("bottom point: " + bot);
+        Console.WriteLine("left point: " + left);
+        Console.WriteLine("right point: " + right);
 
         int edgeSteps = pointSteps;
         Console.WriteLine("edge steps: " + edgeSteps);
@@ -75,6 +82,8 @@ public class Problem21
         (long, long) botRight = ComputeSteps(grid, [startBot, startRight], edgeSteps);
         (long, long) botLeft = ComputeSteps(grid, [startBot, startLeft], edgeSteps);
 
+        // Console.WriteLine("bottom left edge: " + botLeft);
+
         int cornerSteps = (int)((steps - grid.Width) % grid.Width);
         Console.WriteLine("cornerSteps: " + cornerSteps);
         (long, long) cTopRight = ComputeSteps(grid, [(grid.Width - 1, grid.Height - 1, 0)], cornerSteps);
@@ -82,12 +91,28 @@ public class Problem21
         (long, long) cBotRight = ComputeSteps(grid, [(0, 0, 0)], cornerSteps);
         (long, long) cBotLeft = ComputeSteps(grid, [(grid.Width - 1, 0, 0)], cornerSteps);
 
+        Console.WriteLine("Corner top right: " + cTopRight);
+        Console.WriteLine("Corner top left: " + cTopLeft);
+        Console.WriteLine("Corner bottom right: " + cBotRight);
+        Console.WriteLine("Corner bottom left: " + cBotLeft);
+
         long pointTotal = top.Item1 + bot.Item1 + left.Item1 + right.Item1;
+        if (pointSteps % 2 == 1)
+        {
+            pointTotal = top.Item2 + bot.Item2 + left.Item2 + right.Item2;
+        }
         long edgeTotal = new List<long>([topRight.Item1, topLeft.Item1, botRight.Item1, botLeft.Item1]).Aggregate((a, b) => a + b);
+        if (edgeSteps % 2 == 1)
+        {
+            edgeTotal = new List<long>([topRight.Item2, topLeft.Item2, botRight.Item2, botLeft.Item2]).Aggregate((a, b) => a + b);
+        }
         long cornerTotal = new List<long>([cTopRight.Item1, cTopLeft.Item1, cBotRight.Item1, cBotLeft.Item1]).Aggregate((a, b) => a + b);
+
         long m = (steps / grid.Width) - 1;
         long n = m + 1;
+        Console.WriteLine("Corner Total: " + cornerTotal);
         Console.WriteLine("m: " + m);
+        Console.WriteLine(pointTotal + " " + (m * edgeTotal) + " " + n * cornerTotal);
         return pointTotal + m * edgeTotal + n * cornerTotal;
     }
 
