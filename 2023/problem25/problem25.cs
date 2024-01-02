@@ -7,7 +7,7 @@ public class Problem25
 {
     public static void Solve()
     {
-        string file = "2023/problem25/input.txt";
+        string file = "2023/problem25/testinput.txt";
         Graph graph = Graph.FromFile(file);
         // Console.WriteLine(graph);
         Console.WriteLine(graph.GetVertices().Count);

@@ -1,0 +1,74 @@
+Day 1:
+    - first and last digits in a string
+    - first and last digits might be the word of the number
+Day 2:
+    - valid selections from a bag of colored cubes
+    - minimum number of each color of cube in the bag
+Day 3:
+    - 2D-array adjacency
+    - more complicated 2D-array adjacency
+Day 4:
+    - Evaluating winning numbers on scratch cards
+    - Cascading multiples of wins across scratch cards
+Day 5:
+    - Mapping seeds across different ranges
+    - Mapping ranges of seeds across different ranges
+Day 6:
+    - Number of ways to win a race based on charging up your boat
+    - Much longer race
+Day 7:
+    - Camel Poker
+    - Camel Poker with wildcards
+Day 8:
+    - Navigating binary network
+    - Finding lcm of loops in the network
+Day 9:
+    - next value in a sequence
+    - first value in a sequence
+Day 10:
+    - Finding furthest point in a loop in a pipe maze
+    - Finding the inner area of the loop
+Day 11:
+    - Manhattan distance between pairs of "galaxies"
+    - distance between pairs after adding huge expansion between them
+Day 12:
+    - number of possible arrangements of characters
+    - number of possibile arrangements when there's 5x as many characters
+Day 13:
+    - palindromes in a set of strings
+    - off-by-one palindromes
+Day 14:
+    - Sliding rocks on a tilted platform
+    - Sliding the rocks in a huge cycle
+Day 15:
+    - hashing strings
+    - hashing strings with ordered list of collisions
+Day 16:
+    - splitting and reflecting beams of light
+    - handling many more beams
+Day 17:
+    - Shortest path but can't go in the same direction too many times in a row
+    - Shortest path but most go a certain amount of times in a row too
+Day 18:
+    - "Digging" out and computing the area of a polygon
+    - Computing the area of a much larger polygon
+Day 19:
+    - Mapping parts by rating comparison
+    - Figure out exact range across all possible mappings
+Day 20:
+    - logic gates
+    - logic gates with special structure
+Day 21:
+    - flood fill with a twist
+    - Insanely large flood fill depending heavily on the structure of the twist
+Day 22:
+    - falling jenga blocks
+    - computing what would happen if any one block was removed
+Day 23:
+    - longest path with a constrained maze
+    - longest path on a very large, but mostly straight maze
+Day 24:
+    - computing which lines intersect an area in a certain timeframe
+    - computing line which intersects all other lines 
+Day 25:
+    - min cut problem

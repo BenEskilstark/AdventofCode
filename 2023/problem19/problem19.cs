@@ -1,21 +1,7 @@
 using System.Data;
-using System.Reflection.Emit;
 using Range = (char Cat, int Min, int Max); // Upper bound exclusive
 
 namespace Year2023;
-
-/*@
-    TODO:
-        - Implement InvertRange (AndRanges might be broken)
-        - Implement OrRange
-        - Recursion algo:
-            - walk down the children
-                - Invert the previous rule and "And" it with the current rule
-                - "And" the current rule with the result of recursively evaluating the child
-                - if it is A or R, then just use that range
-                - if it is a direct link then just recurse into that one
-                - range that results in from all these Ands is the answer
-@*/
 
 public class Problem19
 {
@@ -23,7 +9,7 @@ public class Problem19
     {
         string file = "2023/problem19/testinput.txt";
         Dictionary<string, Workflow> workflows = [];
-        Dictionary<string, WTree> wTrees = [];
+        Dictionary<string, WTree> wMap = [];
         List<Part> parts = [];
 
         // parse workflows and parts
@@ -40,7 +26,7 @@ public class Problem19
                 Workflow w = new(line);
                 workflows[w.Label] = w;
                 WTree t = new(line);
-                wTrees[t.Label] = t;
+                wMap[t.Label] = t;
             }
             else
             {
@@ -62,7 +48,24 @@ public class Problem19
         // Console.WriteLine(sum);
 
         // Part 2:
-        Console.WriteLine(wTrees["in"].ComputeChildRanges(wTrees));
+        // Console.WriteLine(string.Join("\n", wMap.ToList()));
+
+        BTree<int> bTree = new(5)
+        {
+            LeftChild = new(3),
+            RightChild = new(7)
+        };
+        bTree.LeftChild.LeftChild = new(1);
+        bTree.LeftChild.LeftChild.LeftChild = new(0);
+        bTree.LeftChild.LeftChild.RightChild = new(2);
+        bTree.LeftChild.RightChild = new(4);
+        bTree.RightChild.LeftChild = new(6);
+        bTree.RightChild.LeftChild.RightChild = new(7);
+        bTree.RightChild.RightChild = new(8);
+        bTree.RightChild.RightChild.RightChild = new(9);
+
+        Console.WriteLine(string.Join(", ", bTree.Flatten()));
+        Console.WriteLine(bTree);
     }
 
 
@@ -72,9 +75,7 @@ public class Problem19
 public class WTree
 {
     public string Label { get; }
-    public Dictionary<string, Rule> Children = [];
     public List<Rule> Rules { get; set; } = [];
-    public bool Computed { get; set; } = false;
 
     public WTree(string Line)
     {
@@ -84,37 +85,24 @@ public class WTree
         {
             if (rule == "A" || rule == "R" || !rule.Contains(':'))
             {
-                this.Children[rule] = Rule.LeafRule(rule);
+                this.Rules.Add(Rule.LeafRule(rule));
                 continue;
             }
             char category = rule[0];
             string label = rule.Split(':')[1];
             int value = int.Parse(rule.Split(':')[0][2..]);
-            this.Children[label] = new(category, rule[1] == '<', value, label);
+            this.Rules.Add(new(category, rule[1] == '<', value, label));
         }
     }
+
+    // public BTree<Rule> ConstructTree(Dictionary<string, WTree> wMap)
+    // {
+
+    // }
 
     public override string ToString()
     {
-        return string.Join(";", this.Rules);
-    }
-
-    public List<Range> ComputeChildRanges(Dictionary<string, WTree> Dict)
-    {
-        List<Range> ranges = Rule.FullRange();
-        foreach (var child in this.Children.ToList())
-        {
-            Rule rule = child.Value;
-            if (child.Key == "A" || child.Key == "R")
-            {
-                ranges = Rule.AndRanges(ranges, rule.Ranges);
-            }
-            else if (rule.Cat != '?')
-            {
-
-            }
-        }
-        return ranges;
+        return string.Join("; ", this.Rules);
     }
 }
 
@@ -123,41 +111,25 @@ public class WTree
 
 
 
-public class Rule
+public class Rule(char Cat, bool LessThan, int Value, string child)
 {
-    public char Cat { get; }
-    public bool LessThan { get; }
-    public int Value { get; }
-    public string Child { get; }
-    public List<Range> Ranges { get; set; }
-
-    public Rule(char Cat, bool LessThan, int Value, string Child)
-    {
-        this.Cat = Cat;
-        this.LessThan = LessThan;
-        this.Value = Value;
-        this.Child = Child;
-        this.Ranges = Rule.FullRange();
-        if (Child == "R" && Cat == '?')
-        {
-            this.Ranges = Rule.EmptyRange();
-            return;
-        };
-
-        this.Ranges = this.Ranges.Select((Range range) =>
-        {
-            if (range.Cat == Cat)
-            {
-                if (LessThan) return (Cat, range.Min, Value);
-                if (!LessThan) return (Cat, Value + 1, range.Max);
-            }
-            return range;
-        }).ToList();
-    }
+    public char Cat { get; } = Cat;
+    public bool LessThan { get; } = LessThan;
+    public int Value { get; } = Value;
+    public string Child { get; } = child;
 
     public override string ToString()
     {
-        return this.Child + " " + string.Join(' ', this.Ranges);
+        if (this.Cat == '*')
+        {
+            return this.Child;
+        }
+        return this.Cat + (this.LessThan ? " < " : " > ") + this.Value;
+    }
+
+    public static Rule LeafRule(string Label)
+    {
+        return new('*', Label == "R", -1, Label);
     }
 
     public static List<Range> FullRange()
@@ -168,30 +140,6 @@ public class Rule
     public static List<Range> EmptyRange()
     {
         return [('x', 0, 0), ('m', 0, 0), ('a', 0, 0), ('s', 0, 0)];
-    }
-
-    public static Rule LeafRule(string Label)
-    {
-        return new('?', false, -1, Label);
-    }
-
-    public static List<Range> AndRanges(List<Range> A, List<Range> B)
-    {
-        List<Range> combo = [];
-        for (int i = 0; i < A.Count; i++)
-        {
-            Range r = (A[i].Cat, Math.Max(A[i].Min, B[i].Min), Math.Min(A[i].Max, B[i].Max));
-            if (r.Min >= r.Max) r = (A[i].Cat, 0, 0);
-            combo.Add(r);
-        }
-        return combo;
-    }
-
-    public static List<Range> InvertRanges(List<Range> ranges)
-    {
-        List<Range> inv = [];
-
-        return inv;
     }
 }
 
