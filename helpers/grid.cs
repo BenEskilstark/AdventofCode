@@ -10,61 +10,74 @@ public class Grid<T>
     public int Width { get; }
     public int Height { get; }
 
-    public Grid(List<List<T>> G, T D)
+
+    // constructors
+    public Grid(List<List<T>> g, T d)
     {
-        this.Matrix = G;
-        this.Default = D;
-        this.Width = G[0].Count;
-        this.Height = G.Count;
+        this.Matrix = g;
+        this.Default = d;
+        this.Width = g[0].Count;
+        this.Height = g.Count;
+    }
+    public static Grid<T> Initialize(int width, int height, T defaultValue)
+    {
+        List<List<T>> g = [];
+        for (int l = 0; l < height; l++)
+        {
+            List<T> row = [];
+            for (int c = 0; c < width; c++)
+            {
+                row.Add(defaultValue);
+            }
+            g.Add(row);
+        }
+        return new Grid<T>(g, defaultValue);
     }
 
-    public List<T> GetRow(int Index)
-    {
-        return this.Matrix[Index];
-    }
 
-    public void SetRow(int Index, List<T> Row)
+    // Getters:
+    public T At(Coord pos)
     {
-        this.Matrix[Index] = Row;
+        if (pos.Y < 0 || pos.X < 0) return this.Default;
+        if (pos.X >= this.Width || pos.Y >= this.Height) return this.Default;
+        return Matrix[pos.Y][pos.X];
     }
-
-    public List<T> GetCol(int Index)
+    public List<T> GetRow(int index)
+    {
+        return this.Matrix[index];
+    }
+    public List<T> GetCol(int index)
     {
         List<T> col = [];
         Console.WriteLine(this.Matrix[0].Count);
         for (int i = 0; i < this.Matrix.Count; i++)
         {
-            col.Add(this.Matrix[i][Index]);
+            col.Add(this.Matrix[i][index]);
         }
         return col;
     }
 
-    public void SetCol(int Index, List<T> values)
+
+    // Setters:
+    public void Set(Coord pos, T value)
+    {
+        Matrix[pos.Y][pos.X] = value;
+    }
+    public void SetRow(int index, List<T> row)
+    {
+        this.Matrix[index] = row;
+    }
+    public void SetCol(int index, List<T> values)
     {
         for (int i = 0; i < this.Matrix.Count; i++)
         {
-            this.Matrix[i][Index] = values[i];
+            this.Matrix[i][index] = values[i];
         }
     }
 
-    public T At(Coord Pos)
-    {
-        try
-        {
-            return Matrix[Pos.Y][Pos.X];
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            return this.Default;
-        }
-    }
 
-    public void Set(Coord Pos, T Value)
-    {
-        Matrix[Pos.Y][Pos.X] = Value;
-    }
-
-    public Grid<T> Map(Func<Coord, T> F)
+    // Map Methods:
+    public Grid<T> Map(Func<Coord, T> f)
     {
         List<List<T>> g = [];
         for (int y = 0; y < Matrix.Count; y++)
@@ -73,32 +86,31 @@ public class Grid<T>
             List<T> newRow = [];
             for (int x = 0; x < row.Count; x++)
             {
-                newRow.Add(F((x, y)));
+                newRow.Add(f((x, y)));
             }
             g.Add(newRow);
         }
-        // G = g;
         return new Grid<T>(g, this.Default);
     }
-
-    public Grid<T> ForEach(Action<Coord, T> F)
+    public Grid<T> ForEach(Action<Coord, T> f)
     {
         for (int y = 0; y < Matrix.Count; y++)
         {
             List<T> row = Matrix[y];
             for (int x = 0; x < row.Count; x++)
             {
-                F((x, y), Matrix[y][x]);
+                f((x, y), Matrix[y][x]);
             }
         }
         return this;
     }
-
     public Grid<T> Copy()
     {
         return this.Map(this.At);
     }
 
+
+    // Query Methods
     public List<Coord> GetNeighbors(Coord coord)
     {
         List<Coord> neighbors = [];
@@ -110,6 +122,8 @@ public class Grid<T>
         return neighbors;
     }
 
+
+    // Mix Methods:
     public Grid<T> Pivot()
     {
         List<List<T>> newLists = [];
@@ -134,11 +148,12 @@ public class Grid<T>
         return newGrid;
     }
 
+
+    // Import/Export Methods:
     public void Print()
     {
         Console.WriteLine(this.ToString());
     }
-
     public override string ToString()
     {
         string str = "";
@@ -148,10 +163,9 @@ public class Grid<T>
         }
         return str;
     }
-
-    public void Save(string Path)
+    public void Save(string path)
     {
-        using StreamWriter writer = new(Path);
+        using StreamWriter writer = new(path);
         foreach (List<T> row in Matrix)
         {
             writer.WriteLine(string.Join("", row));
