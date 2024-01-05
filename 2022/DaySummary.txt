@@ -1,0 +1,26 @@
+Day 1:
+    - maximum in a list
+    - top 3 in a list
+Day 2:
+    - Rock paper scissors scoring
+    - Slightly more complicated scoring method
+Day 3:
+    - finding common characters in a list
+    - characters common across multiple lines
+Day 4:
+    - ranges fully containing other ranges
+    - ranges that overlap at all
+Day 5:
+    - lifting stacks of crates with a crane
+    - have to pop many and push many crates at once
+Day 6:
+    - sliding window across a list again
+    - longer sliding window
+Day 7:
+    - parsing command line output with cd and ls to recursively find directory sizes
+    - finding which directory to delete
+Day 8:
+    - scanning from outside a grid in for tallest trees
+    - finding tree that in the grid that can see the furthest
+Day 9:
+    -
