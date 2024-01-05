@@ -49,7 +49,6 @@ public class Snake(Vec head)
                 Vec tail = this.Body[i];
                 if (!Snake.Adjacent(tail, head))
                 {
-
                     Vec nextTail = (tail.X, tail.Y);
                     if (tail.X != head.X)
                     {
@@ -63,29 +62,12 @@ public class Snake(Vec head)
                     }
                     this.Body[i] = (nextTail.X, nextTail.Y);
 
-
-                    // if (tail.X != head.X && tail.Y != head.Y)
-                    // {
-
-                    // }
-                    // else if (tail.X != head.X)
-                    // {
-                    //     if (tail.X > head.X) this.Body[i] = (tail.X - 1, tail.Y);
-                    //     if (tail.X < head.X) this.Body[i] = (tail.X + 1, tail.Y);
-                    // }
-                    // else if (tail.Y != head.Y)
-                    // {
-                    //     if (tail.Y > head.Y) this.Body[i] = (tail.X, tail.Y - 1);
-                    //     if (tail.Y < head.Y) this.Body[i] = (tail.X, tail.Y + 1);
-                    // }
-
                     if (i == this.Body.Count - 1)
                     {
                         tailVisits.Add(this.Body[i]);
                     }
 
                 }
-                // Console.WriteLine(head + " " + this.Body[i]);
             }
 
         }
