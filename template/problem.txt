@@ -1,0 +1,10 @@
+namespace YearYEAR;
+
+public class ProblemDAY
+{
+    public static void Solve()
+    {
+        string file = "YEAR/problemDAY/testinput.txt";
+    }
+
+}

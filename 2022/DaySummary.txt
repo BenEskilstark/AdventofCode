@@ -23,4 +23,5 @@ Day 8:
     - scanning from outside a grid in for tallest trees
     - finding tree that in the grid that can see the furthest
 Day 9:
-    -
+    - snake with slightly different rules
+    - longer snake
