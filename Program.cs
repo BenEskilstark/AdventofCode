@@ -1,7 +1,7 @@
 ﻿// global using Console = System.Diagnostics.Debug;
 
 using System.Diagnostics;
-using CurrentYear = Year2022;
+using CurrentYear = Year2021;
 
 internal class Program
 {
@@ -9,7 +9,7 @@ internal class Program
     {
         Stopwatch timer = new();
         timer.Start();
-        CurrentYear.Problem9.Solve();
+        CurrentYear.Problem4.Solve();
         timer.Stop();
 
         // Format and display the TimeSpan value.
