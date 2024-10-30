@@ -11,4 +11,5 @@ Day 4:
     - first bingo board to win
     - last bingo board to win
 Day 5:
-    -
+    - overlaps of horizontal/vertical lines
+    - overlaps of 45 degree diagonal lines as well
