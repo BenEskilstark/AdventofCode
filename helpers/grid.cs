@@ -7,8 +7,8 @@ public class Grid<T>
     public List<List<T>> Matrix { get; set; }
     public T Default { get; set; }
 
-    public int Width { get; }
-    public int Height { get; }
+    public int Width { get; } // num cols
+    public int Height { get; } // num rows
 
 
     // constructors
@@ -49,7 +49,6 @@ public class Grid<T>
     public List<T> GetCol(int index)
     {
         List<T> col = [];
-        Console.WriteLine(this.Matrix[0].Count);
         for (int i = 0; i < this.Matrix.Count; i++)
         {
             col.Add(this.Matrix[i][index]);
@@ -77,7 +76,7 @@ public class Grid<T>
 
 
     // Map Methods:
-    public Grid<T> Map(Func<Coord, T> f)
+    public Grid<T> Map(Func<Coord, T, T> f)
     {
         List<List<T>> g = [];
         for (int y = 0; y < Matrix.Count; y++)
@@ -86,7 +85,7 @@ public class Grid<T>
             List<T> newRow = [];
             for (int x = 0; x < row.Count; x++)
             {
-                newRow.Add(f((x, y)));
+                newRow.Add(f((x, y), Matrix[y][x]));
             }
             g.Add(newRow);
         }
@@ -106,7 +105,7 @@ public class Grid<T>
     }
     public Grid<T> Copy()
     {
-        return this.Map(this.At);
+        return Map((c, v) => v);
     }
 
 
@@ -159,16 +158,16 @@ public class Grid<T>
         string str = "";
         foreach (List<T> row in Matrix)
         {
-            str += string.Join("", row) + '\n';
+            str += string.Join(" ", row) + '\n';
         }
         return str;
     }
-    public void Save(string path)
+    public void Save(string filePath)
     {
-        using StreamWriter writer = new(path);
+        using StreamWriter writer = new(filePath);
         foreach (List<T> row in Matrix)
         {
-            writer.WriteLine(string.Join("", row));
+            writer.WriteLine(string.Join(" ", row));
         }
     }
 

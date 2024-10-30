@@ -8,4 +8,7 @@ Day 3:
     - most/least common bits
     - more complicated filtering of bits
 Day 4:
-    - bingo
+    - first bingo board to win
+    - last bingo board to win
+Day 5:
+    -
