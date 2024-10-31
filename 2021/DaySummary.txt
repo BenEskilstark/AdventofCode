@@ -16,3 +16,6 @@ Day 5:
 Day 6:
     - counting exponential growth naively
     - counting exponential growth more efficiently
+Day 7:
+    - Element in a list that minimizes difference with all other elements
+    - Element that minimizes triangle-number difference with the rest

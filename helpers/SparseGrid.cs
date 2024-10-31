@@ -92,10 +92,10 @@ public class SparseGrid<T>
 
 
     // Query Methods
-    public (Coord, Coord) Bounds()
+    public (Coord, Coord) Bounds(bool forceZeroBounds = false)
     {
-        int minX = 0;
-        int minY = 0;
+        int minX = forceZeroBounds ? 0 : int.MaxValue;
+        int minY = forceZeroBounds ? 0 : int.MaxValue;
         int maxX = 0;
         int maxY = 0;
 
