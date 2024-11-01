@@ -113,7 +113,7 @@ public class SparseGrid<T>
         return ((X: minX, Y: minY), (X: maxX, Y: maxY));
     }
 
-    public List<Coord> GetNeighbors(Coord coord)
+    public List<Coord> GetNeighbors(Coord coord, bool diagonals = false)
     {
         List<Coord> neighbors = [
             (X: coord.X - 1, coord.Y),
@@ -121,6 +121,15 @@ public class SparseGrid<T>
             (coord.X, Y: coord.Y - 1),
             (coord.X, Y: coord.Y + 1)
         ];
+        if (diagonals)
+        {
+            neighbors.AddRange([
+                (X: coord.X - 1, Y: coord.Y - 1),
+                (X: coord.X + 1, Y: coord.Y + 1),
+                (X: coord.X + 1, Y: coord.Y - 1),
+                (X: coord.X - 1, Y: coord.Y + 1)
+            ]);
+        }
         return neighbors.Where(c => !Equals(At(c), Default)).ToList();
     }
 

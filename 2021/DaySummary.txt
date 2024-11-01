@@ -28,3 +28,6 @@ Day 9:
 Day 10:
     - Finding mismatched closing brackets in strings of {[(<
     - Completing the brackets in those sets of open brackets
+Day 11:
+    - Multi-step flood fill 
+    - Finding when whole grid fills

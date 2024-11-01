@@ -110,15 +110,26 @@ public class Grid<T>
 
 
     // Query Methods
-    public List<Coord> GetNeighbors(Coord coord)
+    public List<Coord> GetNeighbors(Coord coord, bool diagonals = false)
     {
-        List<Coord> neighbors = [];
-        if (coord.X > 0) neighbors.Add((X: coord.X - 1, coord.Y));
-        if (coord.X < Width - 1) neighbors.Add((X: coord.X + 1, coord.Y));
-        if (coord.Y > 0) neighbors.Add((coord.X, Y: coord.Y - 1));
-        if (coord.Y < Height - 1) neighbors.Add((coord.X, Y: coord.Y + 1));
-
-        return neighbors;
+        List<Coord> neighbors = [
+            (X: coord.X - 1, coord.Y),
+            (X: coord.X + 1, coord.Y),
+            (coord.X, Y: coord.Y - 1),
+            (coord.X, Y: coord.Y + 1)
+        ];
+        if (diagonals)
+        {
+            neighbors.AddRange([
+                (X: coord.X - 1, Y: coord.Y - 1),
+                (X: coord.X + 1, Y: coord.Y + 1),
+                (X: coord.X + 1, Y: coord.Y - 1),
+                (X: coord.X - 1, Y: coord.Y + 1)
+            ]);
+        }
+        return neighbors
+            .Where(c => c.X >= 0 && c.Y >= 0 && c.X < Width && c.Y < Height)
+            .ToList();
     }
     public List<T> GetNeighborValues(Coord coord)
     {
