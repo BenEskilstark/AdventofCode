@@ -25,3 +25,6 @@ Day 8:
 Day 9:
     - Finding low points in a grid
     - Flood filling grid to find size of largest fills
+Day 10:
+    - Finding mismatched closing brackets in strings of {[(<
+    - Completing the brackets in those sets of open brackets
