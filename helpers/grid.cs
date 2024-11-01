@@ -120,6 +120,12 @@ public class Grid<T>
 
         return neighbors;
     }
+    public List<T> GetNeighborValues(Coord coord)
+    {
+        return GetNeighbors(coord)
+            .Select(At)
+            .ToList();
+    }
 
 
     // Mix Methods:
@@ -158,7 +164,7 @@ public class Grid<T>
         string str = "";
         foreach (List<T> row in Matrix)
         {
-            str += string.Join(" ", row) + '\n';
+            str += string.Join("", row) + '\n';
         }
         return str;
     }
@@ -167,7 +173,7 @@ public class Grid<T>
         using StreamWriter writer = new(filePath);
         foreach (List<T> row in Matrix)
         {
-            writer.WriteLine(string.Join(" ", row));
+            writer.WriteLine(string.Join("", row));
         }
     }
 

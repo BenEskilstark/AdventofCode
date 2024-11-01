@@ -2,7 +2,7 @@ using Coord = (int X, int Y);
 
 public class SparseGrid<T>
 {
-    public Dictionary<Coord, T?> Values { get; set; } = [];
+    public Dictionary<Coord, T?> Coordinates { get; set; } = [];
     public T? Default { get; set; }
 
 
@@ -20,7 +20,7 @@ public class SparseGrid<T>
             {
                 if (!Equals(g[y][x], d))
                 {
-                    Values.Add((x, y), g[y][x]);
+                    Coordinates.Add((x, y), g[y][x]);
                 }
             }
         }
@@ -32,7 +32,7 @@ public class SparseGrid<T>
         {
             if (!Equals(v, Default))
             {
-                Values.Add(c, v);
+                Coordinates.Add(c, v);
             }
         });
     }
@@ -41,20 +41,20 @@ public class SparseGrid<T>
     // Getters
     public T? At(Coord pos)
     {
-        return Values.GetValueOrDefault(pos, Default);
+        return Coordinates.GetValueOrDefault(pos, Default);
     }
 
 
     // Setters
     public void Set(Coord pos, T? value)
     {
-        Values[pos] = value;
+        Coordinates[pos] = value;
     }
     public void Delete(Coord pos)
     {
-        if (Values.ContainsKey(pos))
+        if (Coordinates.ContainsKey(pos))
         {
-            Values.Remove(pos);
+            Coordinates.Remove(pos);
         }
     }
     public void Move(Coord startPos, Coord destPos)
@@ -70,7 +70,7 @@ public class SparseGrid<T>
     // then convert to a regular grid first via ToGrid
     public SparseGrid<T> ForEach(Action<Coord, T?> f)
     {
-        Values.ToList().ForEach(pair =>
+        Coordinates.ToList().ForEach(pair =>
         {
             if (!Equals(pair, default))
             {
@@ -99,7 +99,7 @@ public class SparseGrid<T>
         int maxX = 0;
         int maxY = 0;
 
-        Values
+        Coordinates
             .Where((c, v) => !Equals(v, Default)).ToList()
             .ForEach(pair =>
             {
@@ -112,9 +112,26 @@ public class SparseGrid<T>
 
         return ((X: minX, Y: minY), (X: maxX, Y: maxY));
     }
+
+    public List<Coord> GetNeighbors(Coord coord)
+    {
+        List<Coord> neighbors = [
+            (X: coord.X - 1, coord.Y),
+            (X: coord.X + 1, coord.Y),
+            (coord.X, Y: coord.Y - 1),
+            (coord.X, Y: coord.Y + 1)
+        ];
+        return neighbors.Where(c => !Equals(At(c), Default)).ToList();
+    }
+
+    public int GetNumValues()
+    {
+        return Coordinates.Values.Where(v => !Equals(v, Default)).Count();
+    }
+
     public Grid<T?> ToGrid()
     {
-        (Coord min, Coord max) = Bounds();
+        (Coord min, Coord max) = Bounds(true);
         Grid<T?> grid = Grid<T?>.Initialize(max.X - min.X + 1, max.Y - min.Y + 1, Default);
         grid.ForEach((c, v) =>
         {
@@ -128,7 +145,7 @@ public class SparseGrid<T>
     public override string ToString()
     {
         string str = "";
-        Values.ToList().ForEach(pair => str += pair.Key + ": " + pair.Value + "\n");
+        Coordinates.ToList().ForEach(pair => str += pair.Key + ": " + pair.Value + "\n");
         return str;
     }
 
