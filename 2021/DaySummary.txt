@@ -34,3 +34,6 @@ Day 11:
 Day 12:
     - Finding all paths through a graph visiting certain nodes only once
     - Finding all paths but can visit one node twice
+Day 13:
+    - Folding a grid
+    - Folding a grid many times and seeing what shape was created
