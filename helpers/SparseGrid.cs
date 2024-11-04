@@ -52,10 +52,7 @@ public class SparseGrid<T>
     }
     public void Delete(Coord pos)
     {
-        if (Coordinates.ContainsKey(pos))
-        {
-            Coordinates.Remove(pos);
-        }
+        Coordinates.Remove(pos);
     }
     public void Move(Coord startPos, Coord destPos)
     {
