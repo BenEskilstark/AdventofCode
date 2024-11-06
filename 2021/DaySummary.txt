@@ -37,3 +37,9 @@ Day 12:
 Day 13:
     - Folding a grid
     - Folding a grid many times and seeing what shape was created
+Day 14:
+    - Expanding strings with replacement, like an L-System
+    - Expanding the strings a huge number of times, counting frequency of chars
+Day 15:
+    - Shortest path in a grid
+    - Shortest path in a much bigger grid
