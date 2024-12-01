@@ -29,17 +29,17 @@ public class Problem5
 
 }
 
-public class Line(Coord start, Coord end)
+public class Line(Coord _start, Coord _end)
 {
-    public Coord Start = start;
-    public Coord End = end;
+    public Coord Start = _start;
+    public Coord End = _end;
 
     public static Line Parse(string lineStr)
     {
         string[] parts = lineStr.Split(" -> ");
-        Coord start = (X: int.Parse(parts[0].Split(',')[0]), Y: int.Parse(parts[0].Split(',')[1]));
-        Coord end = (X: int.Parse(parts[1].Split(',')[0]), Y: int.Parse(parts[1].Split(',')[1]));
-        return new Line(start, end);
+        Coord s = (X: int.Parse(parts[0].Split(',')[0]), Y: int.Parse(parts[0].Split(',')[1]));
+        Coord e = (X: int.Parse(parts[1].Split(',')[0]), Y: int.Parse(parts[1].Split(',')[1]));
+        return new Line(s, e);
     }
 
     public static (Coord, Coord) Bounds(List<Line> lines)
@@ -76,8 +76,8 @@ public class Line(Coord start, Coord end)
         List<Coord> points = [];
         int deltaX = Start.X < End.X ? 1 : -1;
         int deltaY = Start.Y < End.Y ? 1 : -1;
-        if (start.X == End.X) deltaX = 0;
-        if (start.Y == End.Y) deltaY = 0;
+        if (Start.X == End.X) deltaX = 0;
+        if (Start.Y == End.Y) deltaY = 0;
         Coord pos = (Start.X, Start.Y);
         while (pos != End)
         {
