@@ -8,26 +8,22 @@ public class Problem1
     {
         string file = "2024/problem1/input.txt";
         List<int> left = [];
-        Dictionary<int, int> right = [];
+        DefaultDict<int, int> dRight = new(0);
         foreach (string line in File.ReadAllLines(file))
         {
             int l = int.Parse(line.Split("   ")[0]);
             int r = int.Parse(line.Split("   ")[1]);
             left.Add(l);
-            if (!right.TryAdd(r, 1)) right[r]++;
+            dRight[r]++;
         }
 
-        long sum = 0;
+        long dsum = 0;
         for (int i = 0; i < left.Count; i++)
         {
-            if (right.TryGetValue(left[i], out int num))
-            {
-                sum += num * left[i];
-            }
+            dsum += left[i] * dRight[left[i]];
         }
 
-
-        Console.WriteLine(sum);
+        Console.WriteLine(dsum);
     }
 
 }

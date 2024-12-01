@@ -1,0 +1,3 @@
+Day 1:
+    - comparing differences between sorted lists
+    - comparing number of occurrences of values between lists
