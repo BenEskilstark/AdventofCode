@@ -43,6 +43,10 @@ public class SparseGrid<T>
     {
         return Coordinates.GetValueOrDefault(pos, Default);
     }
+    public int GetNumValues()
+    {
+        return Coordinates.Values.Where(v => !Equals(v, Default)).Count();
+    }
 
 
     // Setters
@@ -52,10 +56,7 @@ public class SparseGrid<T>
     }
     public void Delete(Coord pos)
     {
-        if (Coordinates.ContainsKey(pos))
-        {
-            Coordinates.Remove(pos);
-        }
+        Coordinates.Remove(pos);
     }
     public void Move(Coord startPos, Coord destPos)
     {
@@ -133,14 +134,9 @@ public class SparseGrid<T>
         return neighbors.Where(c => !Equals(At(c), Default)).ToList();
     }
 
-    public int GetNumValues()
+    public Grid<T?> ToGrid(bool forceZeroBounds = true)
     {
-        return Coordinates.Values.Where(v => !Equals(v, Default)).Count();
-    }
-
-    public Grid<T?> ToGrid()
-    {
-        (Coord min, Coord max) = Bounds(true);
+        (Coord min, Coord max) = Bounds(forceZeroBounds);
         Grid<T?> grid = Grid<T?>.Initialize(max.X - min.X + 1, max.Y - min.Y + 1, Default);
         grid.ForEach((c, v) =>
         {

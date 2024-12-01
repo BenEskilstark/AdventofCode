@@ -31,3 +31,15 @@ Day 10:
 Day 11:
     - Multi-step flood fill 
     - Finding when whole grid fills
+Day 12:
+    - Finding all paths through a graph visiting certain nodes only once
+    - Finding all paths but can visit one node twice
+Day 13:
+    - Folding a grid
+    - Folding a grid many times and seeing what shape was created
+Day 14:
+    - Expanding strings with replacement, like an L-System
+    - Expanding the strings a huge number of times, counting frequency of chars
+Day 15:
+    - Shortest path in a grid
+    - Shortest path in a much bigger grid
