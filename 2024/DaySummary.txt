@@ -1,3 +1,6 @@
 Day 1:
     - comparing differences between sorted lists
     - comparing number of occurrences of values between lists
+Day 2:
+    - finding monotonic lists with less than certain distance between elements
+    - finding those lists where removing one element also counts as passing
