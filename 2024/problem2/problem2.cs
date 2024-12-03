@@ -10,7 +10,6 @@ public class Problem2
             .Sum(line => IsSafe(line.GetNums()) ? 1 : 0)
             .WriteLine("part 1:");
 
-
         // PART 2
         File.ReadLines(file)
             .Select(line => line.GetNums())
@@ -18,13 +17,11 @@ public class Problem2
             .WriteLine("part 2: ");
     }
 
-
     public static bool IsSafe(List<int> nums)
     {
-        return !(1..nums.Count).ToList()
-            .Any(i => !Safe(nums[i - 1], nums[i], nums[0] < nums[1]));
+        return (1..nums.Count).ToEnumerable()
+            .All(i => Safe(nums[i - 1], nums[i], nums[0] < nums[1]));
     }
-
 
     public static bool Safe(int num1, int num2, bool isIncreasing)
     {

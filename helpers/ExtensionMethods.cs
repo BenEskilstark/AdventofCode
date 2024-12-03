@@ -23,6 +23,20 @@ public static class EnumerableExtensions
 }
 
 
+public static class ListExtensions
+{
+    // in-place sort that returns void is annoying. So still sort in place
+    // (because I don't want to deal with generic copying), but then just 
+    // return yourself. Use like:
+    // [5,4,2,1,3].FSort().Take(2); // returns [1, 2]
+    public static List<T> FSort<T>(this List<T> source)
+    {
+        source.Sort();
+        return source;
+    }
+}
+
+
 public static class IntExtensions
 {
     // Use like  4.WriteLine(); // prints "4"
@@ -47,28 +61,37 @@ public static class RangeExtensions
     // Use like  (0..10).ToList().Select(i => i * i);
     public static List<int> ToList(this Range range)
     {
+        return range.ToEnumerable().ToList();
+    }
+
+    // To more efficiently use the other enumerable methods without having
+    // to implement them here
+    public static IEnumerable<int> ToEnumerable(this Range range)
+    {
         int start = range.Start.IsFromEnd
             ? throw new ArgumentException("Range must have a start index")
             : range.Start.Value;
         int count = range.End.IsFromEnd
             ? throw new ArgumentException("Range must have an end index")
             : range.End.Value - start;
-        return Enumerable.Range(range.Start.Value, count).ToList();
+        return Enumerable.Range(range.Start.Value, count);
     }
 
     public static bool Any(this Range range, Func<int, bool> predicate)
     {
-        int start = range.Start.IsFromEnd
-            ? throw new ArgumentException("Range must have a start index")
-            : range.Start.Value;
-        int count = range.End.IsFromEnd
-            ? throw new ArgumentException("Range must have an end index")
-            : range.End.Value - start;
-        return Enumerable.Range(range.Start.Value, count).Any(predicate);
+        return range.ToEnumerable().Any(predicate);
+    }
+    public static int Sum(this Range range)
+    {
+        return range.ToEnumerable().Sum();
+    }
+    public static int Sum(this Range range, Func<int, int> predicate)
+    {
+        return range.ToEnumerable().Sum(predicate);
     }
 
     public static List<int> Concat(this Range range, Range other)
     {
-        return range.ToList().Concat(other.ToList()).ToList();
+        return range.ToEnumerable().Concat(other.ToEnumerable()).ToList();
     }
 }

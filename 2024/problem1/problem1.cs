@@ -7,23 +7,14 @@ public class Problem1
     public static void Solve()
     {
         string file = "2024/problem1/input.txt";
-        List<int> left = [];
-        DefaultDict<int, int> dRight = new(0);
-        foreach (string line in File.ReadAllLines(file))
-        {
-            int l = int.Parse(line.Split("   ")[0]);
-            int r = int.Parse(line.Split("   ")[1]);
-            left.Add(l);
-            dRight[r]++;
-        }
+        List<int> left = File.ReadLines(file).Select(line => line.GetNums())
+            .Aggregate((List<int>)[], (l, n) => [.. l, n[0]]).FSort();
+        List<int> right = File.ReadLines(file).Select(line => line.GetNums())
+            .Aggregate((List<int>)[], (l, n) => [.. l, n[1]]).FSort();
+        CountSet<int> dRight = new(right);
 
-        long dsum = 0;
-        for (int i = 0; i < left.Count; i++)
-        {
-            dsum += left[i] * dRight[left[i]];
-        }
-
-        Console.WriteLine(dsum);
+        (0..left.Count).Sum(i => Math.Abs(left[i] - right[i])).WriteLine("part 1:");
+        (0..left.Count).Sum(i => left[i] * dRight[left[i]]).WriteLine("part 2:");
     }
 
 }
