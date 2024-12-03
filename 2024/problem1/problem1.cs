@@ -1,6 +1,6 @@
 namespace Year2024;
 
-using System.Text.RegularExpressions;
+
 
 public class Problem1
 {
