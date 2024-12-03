@@ -20,6 +20,12 @@ public static class EnumerableExtensions
         Console.WriteLine(string.Join(", ", source.ToList()));
         return source;
     }
+
+    // See ListExtension implementation
+    public static List<List<T>> Transpose<T>(this IEnumerable<List<T>> source)
+    {
+        return source.ToList().Transpose();
+    }
 }
 
 
@@ -33,6 +39,24 @@ public static class ListExtensions
     {
         source.Sort();
         return source;
+    }
+
+    // Assumes that source is a list of lists and then transposes the rows
+    // and columns. So:
+    // List<List<int>> foo = [[1, 2], [3, 4], [5, 6]];
+    // var bar = foo.Transpose(); // is [[1, 3, 5], [2, 4, 6]]
+    public static List<List<T>> Transpose<T>(this List<List<T>> source)
+    {
+        if (source.Count == 0) return [];
+        List<List<T>> result = [.. (0..source[0].Count).Select(i => (List<T>)[])];
+        for (int i = 0; i < source.Count; i++)
+        {
+            for (int j = 0; j < source[i].Count; j++)
+            {
+                result[j].Add(source[i][j]);
+            }
+        }
+        return result;
     }
 }
 
@@ -88,6 +112,14 @@ public static class RangeExtensions
     public static int Sum(this Range range, Func<int, int> predicate)
     {
         return range.ToEnumerable().Sum(predicate);
+    }
+    public static IEnumerable<T> Select<T>(this Range range, Func<int, T> selector)
+    {
+        return range.ToEnumerable().Select(selector);
+    }
+    public static IEnumerable<T> Select<T>(this Range range, Func<int, int, T> selector)
+    {
+        return range.ToEnumerable().Select(selector);
     }
 
     public static List<int> Concat(this Range range, Range other)
