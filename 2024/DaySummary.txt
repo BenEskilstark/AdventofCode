@@ -7,3 +7,6 @@ Day 2:
 Day 3:
     - parsing a string for mul(3,2) commands
     - parsing that string but filtering by do() and don't()
+Day 4:
+    - Finding XMASes in a grid of chars
+    - Finding MASes in an X shape in the grid of chars

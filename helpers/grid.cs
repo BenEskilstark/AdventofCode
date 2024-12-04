@@ -137,6 +137,19 @@ public class Grid<T>
             .Select(At)
             .ToList();
     }
+    public List<Coord> Collect(Func<Coord, T, bool> predicate)
+    {
+        List<Coord> coords = [];
+        ForEach((pos, val) =>
+        {
+            if (predicate(pos, val)) coords.Add(pos);
+        });
+        return coords;
+    }
+    public List<Coord> Collect()
+    {
+        return Collect((pos, val) => true);
+    }
 
 
     // Mix Methods:

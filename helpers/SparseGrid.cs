@@ -114,6 +114,16 @@ public class SparseGrid<T>
         return ((X: minX, Y: minY), (X: maxX, Y: maxY));
     }
 
+    public List<Coord> Collect(Func<Coord, T?, bool> predicate)
+    {
+        List<Coord> coords = [];
+        ForEach((pos, val) =>
+        {
+            if (predicate(pos, val)) coords.Add(pos);
+        });
+        return coords;
+    }
+
     public List<Coord> GetNeighbors(Coord coord, bool diagonals = false)
     {
         List<Coord> neighbors = [

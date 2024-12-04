@@ -9,6 +9,12 @@ public static class StringExtensions
         return Regex.Matches(line, @"\d+")
             .Select(m => int.Parse(m.Value)).ToList();
     }
+
+    // Because ToCharArray is verbose and doesn't return a list
+    public static List<char> ToChars(this string line)
+    {
+        return line.ToCharArray().ToList();
+    }
 }
 
 
@@ -104,6 +110,10 @@ public static class RangeExtensions
     public static bool Any(this Range range, Func<int, bool> predicate)
     {
         return range.ToEnumerable().Any(predicate);
+    }
+    public static bool All(this Range range, Func<int, bool> predicate)
+    {
+        return range.ToEnumerable().All(predicate);
     }
     public static int Sum(this Range range)
     {
