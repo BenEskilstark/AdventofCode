@@ -1,6 +1,9 @@
+
+// A HashSet that keeps track of the number of times a given
+// element was added to the set.
 public class CountSet<TItem> where TItem : notnull
 {
-    private DefaultDict<TItem, int> Counts { get; set; }
+    private Dict<TItem, int> Counts { get; set; }
 
 
     public int Count { get => Counts.Count; }
@@ -30,5 +33,12 @@ public class CountSet<TItem> where TItem : notnull
     {
         Counts[item]++;
         return Counts[item];
+    }
+
+    public HashSet<TItem> ToHashSet()
+    {
+        HashSet<TItem> set = [];
+        Items.ToList().ForEach(item => set.Add(item));
+        return set;
     }
 }

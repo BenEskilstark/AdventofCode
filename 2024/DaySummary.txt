@@ -10,3 +10,6 @@ Day 3:
 Day 4:
     - Finding XMASes in a grid of chars
     - Finding MASes in an X shape in the grid of chars
+Day 5:
+    - Determining lists that are ordered based on pairwise ordering rules
+    - Ordering the unordered lists based on those rules

@@ -15,6 +15,12 @@ public static class StringExtensions
     {
         return line.ToCharArray().ToList();
     }
+
+    public static string WriteLine(this string line)
+    {
+        Console.WriteLine(line);
+        return line;
+    }
 }
 
 
@@ -44,6 +50,11 @@ public static class ListExtensions
     public static List<T> FSort<T>(this List<T> source)
     {
         source.Sort();
+        return source;
+    }
+    public static List<T> FSort<T>(this List<T> source, Comparison<T> comp)
+    {
+        source.Sort(comp);
         return source;
     }
 
