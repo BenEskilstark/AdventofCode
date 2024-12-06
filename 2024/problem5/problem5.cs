@@ -4,7 +4,7 @@ public class Problem5
 {
     public static void Solve()
     {
-        string file = "2024/problem5/input.txt";
+        string file = "2024/problem4/input.txt";
         Dict<int, Set<int>> orders = new(new(), () => new());
         File.ReadAllText(file)
             .Split("\r\n\r\n")[0].Split("\r\n")

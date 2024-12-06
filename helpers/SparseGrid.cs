@@ -47,6 +47,10 @@ public class SparseGrid<T>
     {
         return Coordinates.Values.Where(v => !Equals(v, Default)).Count();
     }
+    public SparseCol<T> this[int colIndex]
+    {
+        get => new SparseCol<T>(this, colIndex);
+    }
 
 
     // Setters
@@ -164,4 +168,17 @@ public class SparseGrid<T>
         return str;
     }
 
+}
+
+
+public class SparseCol<T>(SparseGrid<T> grid, int index)
+{
+    private SparseGrid<T> ParentGrid = grid;
+    public int ColIndex { get; set; } = index;
+
+    public T? this[int row]
+    {
+        get => ParentGrid.At((ColIndex, row));
+        set => ParentGrid.Set((ColIndex, row), value);
+    }
 }
