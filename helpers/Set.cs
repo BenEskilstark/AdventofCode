@@ -55,4 +55,10 @@ public class Set<TItem> where TItem : notnull
         Items.ToList().ForEach(item => set.Add(item));
         return set;
     }
+
+    public Set<TItem> WriteLine()
+    {
+        Console.WriteLine(string.Join(", ", ToList()));
+        return this;
+    }
 }
