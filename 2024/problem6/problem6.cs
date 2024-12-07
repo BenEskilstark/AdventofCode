@@ -15,7 +15,8 @@ public class Problem6
 
         while (grid.At(guard.Pos) != '-')
         {
-            visited.Add(guard.Move().Pos);
+            guard.Move();
+            visited.Add(guard.Pos);
         }
         visited.Remove(guard.Pos); // included the move out of the grid
         visited.Count.WriteLine("Part 1");
@@ -26,14 +27,17 @@ public class Problem6
             if (grid.At(pos) == '^') return; // skip start
             guard = new(grid, initialPosition, '^'); // move guard back to start
             grid.Set(pos, '#'); // add new obstacle
-            CountSet<Visit> loopChecker = new(); // visiting same pos in same dir is a loop
-            while (grid.At(guard.Pos) != '-' && loopChecker[guard.ToTuple()] < 2)
+            Set<Visit> loopChecker = new();
+            while (grid.At(guard.Pos) != '-')
             {
-                loopChecker.Add(guard.Move().ToTuple());
-            }
-            if (loopChecker[guard.ToTuple()] > 1)
-            {
-                numLoops++;
+                bool didRotate = guard.Move();
+                if (loopChecker[guard.ToTuple()])
+                {
+                    numLoops++;
+                    break;
+                }
+                if (didRotate) loopChecker.Add(guard.ToTuple());
+
             }
             grid.Set(pos, '.'); // remove obstacle 
         });
@@ -53,16 +57,18 @@ public class Guard(Grid<char> grid, Coord pos, char dir)
         return (Pos.X, Pos.Y, Dir);
     }
 
-    public Guard Move()
+    public bool Move()
     {
         Coord next = NextPos();
+        bool didRotate = false;
         while (Map.At(next) == '#')
         {
             Rotate();
+            didRotate = true;
             next = NextPos();
         }
         Pos = next;
-        return this;
+        return didRotate;
     }
 
     private Coord NextPos()

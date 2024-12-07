@@ -4,61 +4,52 @@
 // `if (mySet[3])`
 public class Set<TItem> where TItem : notnull
 {
-    private Dict<TItem, bool> BoolSet { get; set; }
+    // private Dict<TItem, bool> BoolSet { get; set; }
+    private HashSet<TItem> BackingSet { get; set; }
 
-
-    public int Count { get => BoolSet.Count; }
-    public IEnumerable<TItem> Items { get => BoolSet.Keys; }
+    public int Count { get => BackingSet.Count; }
+    public List<TItem> Items { get => BackingSet.ToList(); }
 
 
     public Set()
     {
-        BoolSet = new(false);
+        BackingSet = [];
     }
     public Set(List<TItem> items)
     {
-        BoolSet = new(false);
-        items.ForEach(item => BoolSet[item] = true);
+        BackingSet = new(items);
     }
     public Set(HashSet<TItem> set)
     {
-        BoolSet = new(false);
-        set.ToList().ForEach(item => BoolSet[item] = true);
+        BackingSet = new(set);
     }
 
 
     public bool this[TItem item]
     {
-        get => BoolSet[item];
+        get => BackingSet.Contains(item);
     }
 
     public bool Add(TItem item)
     {
-        BoolSet[item] = true;
-        return true;
+        return BackingSet.Add(item);
     }
     public bool Remove(TItem item)
     {
-        return BoolSet.Remove(item);
+        return BackingSet.Remove(item);
     }
 
 
     public List<TItem> ToList()
     {
-        return Items.ToList();
+        return Items;
     }
 
     // Escape hatch into the regular HashSet
-    public HashSet<TItem> ToHashSet()
-    {
-        HashSet<TItem> set = [];
-        Items.ToList().ForEach(item => set.Add(item));
-        return set;
-    }
 
     public Set<TItem> WriteLine()
     {
-        Console.WriteLine(string.Join(", ", ToList()));
+        Console.WriteLine(string.Join(", ", Items));
         return this;
     }
 }
