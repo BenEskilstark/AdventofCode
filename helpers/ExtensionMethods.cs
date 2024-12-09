@@ -10,6 +10,12 @@ public static class StringExtensions
             .Select(m => int.Parse(m.Value)).ToList();
     }
 
+    public static List<long> GetLongs(this string line)
+    {
+        return Regex.Matches(line, @"\d+")
+            .Select(m => long.Parse(m.Value)).ToList();
+    }
+
     // Because ToCharArray is verbose and doesn't return a list
     public static List<char> ToChars(this string line)
     {
