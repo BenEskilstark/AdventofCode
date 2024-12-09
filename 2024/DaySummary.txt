@@ -22,3 +22,6 @@ Day 7:
 Day 8:
     - Finding points (dist) away from each pair of points in a grid
     - Finding all points on a line between each pair of points in a grid
+Day 9:
+    - expanding lists of numbers into memory blocks and "compressing"
+    - compressing only when whole blocks can be moved at a time

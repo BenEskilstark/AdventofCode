@@ -125,6 +125,11 @@ public static class RangeExtensions
         return Enumerable.Range(range.Start.Value, count);
     }
 
+    public static void ForEach(this Range range, Action<int> predicate)
+    {
+        range.ToList().ForEach(predicate);
+    }
+
     public static bool Any(this Range range, Func<int, bool> predicate)
     {
         return range.ToEnumerable().Any(predicate);
