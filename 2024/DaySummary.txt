@@ -13,3 +13,12 @@ Day 4:
 Day 5:
     - Determining lists that are ordered based on pairwise ordering rules
     - Ordering the unordered lists based on those rules
+Day 6:
+    - positions of guard as she bounces around a grid
+    - number of possible cycles created by guard by adding one obstacle at a time
+Day 7:
+    - Possible ways to add or multiply a list of numbers together
+    - Add or multiply or string concat the list of numbers
+Day 8:
+    - Finding points (dist) away from each pair of points in a grid
+    - Finding all points on a line between each pair of points in a grid

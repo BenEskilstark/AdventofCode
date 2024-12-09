@@ -73,4 +73,10 @@ public class Dict<TKey, TValue>(TValue _default, Func<TValue>? _newDefault = nul
         });
         return res;
     }
+
+    public Dict<TKey, TValue> WriteLine()
+    {
+        Console.WriteLine(this.ToString());
+        return this;
+    }
 }

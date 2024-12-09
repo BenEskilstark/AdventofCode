@@ -200,5 +200,12 @@ public class Grid<T>
             writer.WriteLine(string.Join("", row));
         }
     }
+    public static Grid<char> FromFile(string file, char _default = '.')
+    {
+        return new Grid<char>(
+            [.. File.ReadLines(file).Select(l => l.ToChars())],
+            _default
+        );
+    }
 
 }

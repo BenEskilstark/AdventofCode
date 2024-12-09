@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 
+using Coord = (int X, int Y);
 
 public static class StringExtensions
 {
