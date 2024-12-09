@@ -50,7 +50,6 @@ public class Problem9
                 if (exp[j] != -1) continue;
                 int ej = j;
                 for (; ej < i && exp[ej] == exp[j]; ej++) { }
-                // ej--; // off by one
                 if (i - si <= ej - j)
                 {
                     flag = true;
