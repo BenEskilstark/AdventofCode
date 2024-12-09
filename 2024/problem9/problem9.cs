@@ -1,7 +1,5 @@
 namespace Year2024;
 
-using Block = (int ID, int Size);
-
 public class Problem9
 {
     public static void Solve()
