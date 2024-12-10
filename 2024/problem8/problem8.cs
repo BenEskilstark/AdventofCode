@@ -7,7 +7,7 @@ public class Problem8
     public static void Solve()
     {
         string file = "2024/problem8/input.txt";
-        Grid<char> grid = Grid<char>.FromFile(file, '-');
+        Grid<char> grid = Grid<char>.CharsFromFile(file, '-');
         List<Coord> antennas = grid.Collect((pos, val) => val != '.' && val != '#');
         Dict<char, List<Coord>> sortedAntennas = new([], () => []);
         antennas.ForEach(pos => sortedAntennas[grid.At(pos)].Add(pos));

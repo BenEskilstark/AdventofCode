@@ -34,6 +34,11 @@ public class CountSet<TItem> where TItem : notnull
         Counts[item]++;
         return Counts[item];
     }
+    public int AddMany(TItem item, int count)
+    {
+        Counts[item] += count;
+        return Counts[item];
+    }
 
     public HashSet<TItem> ToHashSet()
     {

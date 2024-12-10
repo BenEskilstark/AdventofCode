@@ -25,3 +25,6 @@ Day 8:
 Day 9:
     - expanding lists of numbers into memory blocks and "compressing"
     - compressing only when whole blocks can be moved at a time
+Day 10: 
+    - number of paths through a topographic map (same start/end)
+    - number of distinct paths through the map

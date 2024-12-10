@@ -33,6 +33,21 @@ public class Grid<T>
         }
         return new Grid<T>(g, defaultValue);
     }
+    public static Grid<char> CharsFromFile(string file, char _default = '.')
+    {
+        return new Grid<char>(
+            [.. File.ReadLines(file).Select(l => l.ToChars())],
+            _default
+        );
+    }
+    public static Grid<int> IntsFromFile(string file, int _default = -1)
+    {
+        return new Grid<int>(
+            [.. File.ReadLines(file)
+                .Select(l => l.Select(c => (int)char.GetNumericValue(c)).ToList())],
+            _default
+        );
+    }
 
 
     // Getters:
@@ -199,13 +214,6 @@ public class Grid<T>
         {
             writer.WriteLine(string.Join("", row));
         }
-    }
-    public static Grid<char> FromFile(string file, char _default = '.')
-    {
-        return new Grid<char>(
-            [.. File.ReadLines(file).Select(l => l.ToChars())],
-            _default
-        );
     }
 
 }
