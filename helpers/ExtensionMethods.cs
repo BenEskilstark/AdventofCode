@@ -103,6 +103,23 @@ public static class IntExtensions
     }
 }
 
+public static class LongExtensions
+{
+    // Use like  4.WriteLine(); // prints "4"
+    public static long WriteLine(this long value, string prefix = "")
+    {
+        if (prefix != "" && prefix[^1] != ' ')
+        {
+            Console.WriteLine(prefix + " " + value);
+        }
+        else
+        {
+            Console.WriteLine(prefix + value);
+        }
+
+        return value;
+    }
+}
 
 public static class RangeExtensions
 {

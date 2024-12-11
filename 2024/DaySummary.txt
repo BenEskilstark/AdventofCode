@@ -28,3 +28,6 @@ Day 9:
 Day 10: 
     - number of paths through a topographic map (same start/end)
     - number of distinct paths through the map
+Day 11:
+    - number of stones produced after 25 iterations of an exponential expansion
+    - number produced after 75 iterations of exponential expansion
