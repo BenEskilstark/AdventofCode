@@ -43,13 +43,17 @@ public class SparseGrid<T>
     {
         return Coordinates.GetValueOrDefault(pos, Default);
     }
-    public int GetNumValues()
+    public int Count()
     {
         return Coordinates.Values.Where(v => !Equals(v, Default)).Count();
     }
     public SparseCol<T> this[int colIndex]
     {
         get => new SparseCol<T>(this, colIndex);
+    }
+    public bool Contains(Coord pos)
+    {
+        return !Equals(At(pos), Default);
     }
 
 
@@ -93,6 +97,13 @@ public class SparseGrid<T>
         });
 
         return newGrid;
+    }
+
+    public int Sum(Func<Coord, T?, int> f)
+    {
+        int sum = 0;
+        ForEach((c, v) => sum += f(c, v));
+        return sum;
     }
 
 
@@ -146,6 +157,26 @@ public class SparseGrid<T>
             ]);
         }
         return neighbors.Where(c => !Equals(At(c), Default)).ToList();
+    }
+
+    public List<Coord> GetAllNeighbors(Coord coord, bool diagonals = false)
+    {
+        List<Coord> neighbors = [
+            (X: coord.X - 1, coord.Y),
+            (X: coord.X + 1, coord.Y),
+            (coord.X, Y: coord.Y - 1),
+            (coord.X, Y: coord.Y + 1)
+        ];
+        if (diagonals)
+        {
+            neighbors.AddRange([
+                (X: coord.X - 1, Y: coord.Y - 1),
+                (X: coord.X + 1, Y: coord.Y + 1),
+                (X: coord.X + 1, Y: coord.Y - 1),
+                (X: coord.X - 1, Y: coord.Y + 1)
+            ]);
+        }
+        return neighbors;
     }
 
     public Grid<T?> ToGrid(bool forceZeroBounds = true)

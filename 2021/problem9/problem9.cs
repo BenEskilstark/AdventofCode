@@ -48,7 +48,7 @@ public class Problem9
             }
             basins.Add(thisBasin);
         }
-        List<int> basinSizes = basins.Select(b => b.GetNumValues()).OrderByDescending(v => v).ToList();
+        List<int> basinSizes = basins.Select(b => b.Count()).OrderByDescending(v => v).ToList();
         // Console.WriteLine(string.Join(", ", basinSizes));
         Console.WriteLine(basinSizes[0] * basinSizes[1] * basinSizes[2]);
     }
