@@ -34,3 +34,6 @@ Day 11:
 Day 12:
     - Flood fill regions of a grid, then find area and perimeter of regions
     - Find the number of sides of each region
+Day 13:
+    - Solving pairs of linear equations
+    - Solving pairs of linear equations with big coefficients
