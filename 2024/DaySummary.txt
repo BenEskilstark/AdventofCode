@@ -37,3 +37,6 @@ Day 12:
 Day 13:
     - Solving pairs of linear equations
     - Solving pairs of linear equations with big coefficients
+Day 14:
+    - Finding positions of bots flying in straight lines after 100 steps
+    - Finding which step has the bots arranged like a christmas tree
