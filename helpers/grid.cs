@@ -40,6 +40,13 @@ public class Grid<T>
             _default
         );
     }
+    public static Grid<char> CharsFromString(string chars, char _default = '.')
+    {
+        return new Grid<char>(
+            chars.Split("\n").Select(s => s.ToChars()).ToList(),
+            _default
+        );
+    }
     public static Grid<int> IntsFromFile(string file, int _default = -1)
     {
         return new Grid<int>(
