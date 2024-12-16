@@ -42,4 +42,7 @@ Day 14:
     - Finding which step has the bots arranged like a christmas tree
 Day 15:
     - Pushing boxes around on a grid (they can push eachother)
-    - Boxes are wider, one box could branch out to push multiple boxes
+    - Boxes are wider, one box could branch out to push multiple boxes 
+Day 16:
+    - Shortest path in a maze with penalty for turns
+    - Find the total cells visited by all of the equivalent shortest paths
