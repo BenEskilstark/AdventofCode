@@ -46,3 +46,6 @@ Day 15:
 Day 16:
     - Shortest path in a maze with penalty for turns
     - Find the total cells visited by all of the equivalent shortest paths
+Day 17:
+    - Implementing basic machine code program
+    - Finding an input register value that makes the input program a quine
