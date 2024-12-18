@@ -45,6 +45,11 @@ public static class EnumerableExtensions
     {
         return source.ToList().Transpose();
     }
+
+    public static void ForEach<T>(this IEnumerable<T> source, Action<T> predicate)
+    {
+        source.ToList().ForEach(predicate);
+    }
 }
 
 
@@ -63,6 +68,15 @@ public static class ListExtensions
     {
         source.Sort(comp);
         return source;
+    }
+
+    public static (int, int) ToTuple(this List<int> source)
+    {
+        return (source[0], source[1]);
+    }
+    public static (int, int, int) To3Tuple(this List<int> source)
+    {
+        return (source[0], source[1], source[2]);
     }
 
     // Assumes that source is a list of lists and then transposes the rows

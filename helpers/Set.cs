@@ -19,10 +19,6 @@ public class Set<TItem> where TItem : notnull
     {
         BackingSet = new(items);
     }
-    public Set(HashSet<TItem> set)
-    {
-        BackingSet = new(set);
-    }
 
 
     public bool this[TItem item]

@@ -105,13 +105,12 @@ public class Problem16
         }
         return false;
     }
-
+    private class Link(Coord pos, Coord dir, int score, Link? prev)
+    {
+        public Coord Pos { get; } = pos;
+        public Coord Dir { get; } = dir;
+        public int Score { get; } = score;
+        public Link? Prev { get; set; } = prev;
+    }
 }
 
-public class Link(Coord pos, Coord dir, int score, Link? prev)
-{
-    public Coord Pos { get; } = pos;
-    public Coord Dir { get; } = dir;
-    public int Score { get; } = score;
-    public Link? Prev { get; set; } = prev;
-}

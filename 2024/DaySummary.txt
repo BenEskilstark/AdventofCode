@@ -49,3 +49,6 @@ Day 16:
 Day 17:
     - Implementing basic machine code program
     - Finding an input register value that makes the input program a quine
+Day 18:
+    - Pathfinding in a grid
+    - Pathfinding many grids until a path cannot be found
