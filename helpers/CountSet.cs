@@ -6,8 +6,8 @@ public class CountSet<TItem> where TItem : notnull
     private Dict<TItem, int> Counts { get; set; }
 
 
-    public int Count { get => Counts.Count; }
-    public IEnumerable<TItem> Items { get => Counts.Keys; }
+    public int Count { get => Items.Count(); }
+    public IEnumerable<TItem> Items { get => Counts.Keys.Where(k => this[k] > 0); }
 
 
     public CountSet()

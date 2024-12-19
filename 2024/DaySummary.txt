@@ -52,3 +52,6 @@ Day 17:
 Day 18:
     - Pathfinding in a grid
     - Pathfinding many grids until a path cannot be found
+Day 19:
+    - Finding which sets of patterns are possible to produce w/set of substrings
+    - Finding number of possible combinations of substrings that produce them
