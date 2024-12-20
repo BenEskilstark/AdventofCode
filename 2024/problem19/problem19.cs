@@ -4,49 +4,26 @@ public class Problem19
 {
     public static void Solve()
     {
-        string file = "2024/problem19/input.txt";
-        List<string> towels = [.. File.ReadAllText(file).Split("\r\n\r\n")[0].Split(", ")];
-        List<string> patterns = [.. File.ReadAllText(file).Split("\r\n\r\n")[1].Split("\r\n")];
+        string file = File.ReadAllText("2024/problem19/input.txt");
+        List<string> towels = [.. file.Split("\n\n")[0].Split(", ")];
+        List<string> patterns = file.Split("\n\n")[1].Split("\n")
+            .Where(p => new Memo(towels).GetNumCombos(p) > 0).ToList();
 
-        List<string> possiblePatterns = patterns.Where(pattern =>
-        {
-            Set<string> visited = new();
-            Stack<string> attempts = new(towels);
-            while (attempts.TryPop(out string sofar))
-            {
-                if (sofar == pattern) return true;
-                if (sofar.Length > pattern.Length) continue;
-                if (!pattern.StartsWith(sofar)) continue;
-                if (visited[sofar]) continue;
-                visited.Add(sofar);
-                towels.ForEach(t => attempts.Push(sofar + t));
-            }
-            return false;
-        }).ToList();
-        possiblePatterns.Count.WriteLine("Part 1:");
-
-        possiblePatterns
-            .Sum(new Memo(towels).GetNumCombos)
-            .WriteLine("Part 2:");
+        patterns.Count.WriteLine("Part 1:");
+        patterns.Sum(new Memo(towels).GetNumCombos).WriteLine("Part 2:");
     }
 
-
-
-    private class Memo(List<string> towels)
+    private class Memo(List<string> Towels)
     {
-        public List<string> Towels { get; } = towels;
         public Dict<string, long> ToEnd { get; set; } = new(0);
-
         public long GetNumCombos(string pattern)
         {
             if (pattern == "") return 1;
-            if (ToEnd[pattern] > 0) return ToEnd[pattern];
-            long res = Towels
+            if (ToEnd.ContainsKey(pattern)) return ToEnd[pattern];
+            ToEnd[pattern] = Towels
                 .Where(pattern.StartsWith)
                 .Sum(t => GetNumCombos(pattern[t.Length..]));
-            ToEnd[pattern] += res;
-            return res;
+            return ToEnd[pattern];
         }
     }
-
 }
