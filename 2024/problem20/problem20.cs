@@ -12,29 +12,20 @@ public class Problem20
 
         Link shortestPath = ShortestPath(maze, start, end);
         List<Link> links = shortestPath.ToArray();
-        CountSet<int> saved = new();
+        CountSet<int> saved1 = new();
+        CountSet<int> saved2 = new();
         for (int i = 0; i < links.Count - 2; i++)
         {
             for (int j = i + 2; j < links.Count; j++)
             {
-                int distSaved = links[i].Cheatable1(links[j]);
-                if (distSaved > 99) saved.Add(distSaved);
+                int distSaved1 = links[i].Cheatable1(links[j]);
+                if (distSaved1 > 99) saved1.Add(distSaved1);
+                int distSaved2 = links[i].Cheatable2(links[j]);
+                if (distSaved2 > 99) saved2.Add(distSaved2);
             }
         }
-        // saved.Items.ToList().FSort().ForEach(i => i.WriteLine("There are " + saved[i] + " cheats that save: "));
-        saved.Items.Sum(i => saved[i]).WriteLine("Part 1:");
-
-        saved = new();
-        for (int i = 0; i < links.Count - 2; i++)
-        {
-            for (int j = i + 2; j < links.Count; j++)
-            {
-                int distSaved = links[i].Cheatable2(links[j]);
-                if (distSaved > 99) saved.Add(distSaved);
-            }
-        }
-        // saved.Items.ToList().FSort().ForEach(i => i.WriteLine("There are " + saved[i] + " cheats that save: "));
-        saved.Items.Sum(i => saved[i]).WriteLine("Part 2:");
+        saved1.Items.Sum(i => saved1[i]).WriteLine("Part 1:");
+        saved2.Items.Sum(i => saved2[i]).WriteLine("Part 2:");
     }
 
     private static Link ShortestPath(Grid<char> maze, Coord start, Coord end)
