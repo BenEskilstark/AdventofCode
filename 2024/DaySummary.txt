@@ -55,3 +55,6 @@ Day 18:
 Day 19:
     - Finding which sets of patterns are possible to produce w/set of substrings
     - Finding number of possible combinations of substrings that produce them
+Day 20:
+    - Shortest paths if you can pass through one wall
+    - Shortest paths if you can pass through up to 20 walls in a row
