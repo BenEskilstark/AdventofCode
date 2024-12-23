@@ -58,3 +58,12 @@ Day 19:
 Day 20:
     - Shortest paths if you can pass through one wall
     - Shortest paths if you can pass through up to 20 walls in a row
+Day 21:
+    -
+    -
+Day 22:
+    - Finding the sum of a bunch of pseudo-randomly generated numbers
+    - Finding the largest sequence of 4 differences in number across all sequences
+Day 23:
+    - Finding all cliques of size 3 in a graph
+    - Finding the largest clique in a graph

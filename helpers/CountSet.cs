@@ -40,6 +40,23 @@ public class CountSet<TItem> where TItem : notnull
         return Counts[item];
     }
 
+
+    public TItem Max()
+    {
+        int bestVal = 0;
+        TItem bestKey = default;
+        Items.ForEach(i =>
+        {
+            if (Counts[i] > bestVal)
+            {
+                bestVal = Counts[i];
+                bestKey = i;
+            }
+        });
+        return bestKey!;
+    }
+
+
     public HashSet<TItem> ToHashSet()
     {
         HashSet<TItem> set = [];

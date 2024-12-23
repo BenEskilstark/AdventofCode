@@ -41,11 +41,23 @@ public class Set<TItem> where TItem : notnull
         return Items;
     }
 
+
+    public void ForEach(Action<TItem> predicate)
+    {
+        Items.ForEach(predicate);
+    }
+
     // Escape hatch into the regular HashSet
 
     public Set<TItem> WriteLine()
     {
         Console.WriteLine(string.Join(", ", Items));
         return this;
+    }
+
+
+    public override string ToString()
+    {
+        return string.Join(",", Items);
     }
 }
