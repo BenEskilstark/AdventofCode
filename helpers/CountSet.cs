@@ -27,6 +27,7 @@ public class CountSet<TItem> where TItem : notnull
     public int this[TItem item]
     {
         get => Counts[item];
+        set => Counts[item] = value;
     }
 
     public int Add(TItem item)
@@ -48,6 +49,21 @@ public class CountSet<TItem> where TItem : notnull
         Items.ForEach(i =>
         {
             if (Counts[i] > bestVal)
+            {
+                bestVal = Counts[i];
+                bestKey = i;
+            }
+        });
+        return bestKey!;
+    }
+
+    public TItem Min()
+    {
+        int bestVal = int.MaxValue;
+        TItem bestKey = default;
+        Items.ForEach(i =>
+        {
+            if (Counts[i] < bestVal)
             {
                 bestVal = Counts[i];
                 bestKey = i;

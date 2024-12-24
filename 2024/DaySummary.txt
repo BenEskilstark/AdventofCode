@@ -59,8 +59,8 @@ Day 20:
     - Shortest paths if you can pass through one wall
     - Shortest paths if you can pass through up to 20 walls in a row
 Day 21:
-    -
-    -
+    - Pressing remote control buttons for recursive series of robots
+    - Way more robots in the chain of robots controlling the next's remotes
 Day 22:
     - Finding the sum of a bunch of pseudo-randomly generated numbers
     - Finding the largest sequence of 4 differences in number across all sequences

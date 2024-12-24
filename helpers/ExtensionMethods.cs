@@ -28,6 +28,16 @@ public static class StringExtensions
         Console.WriteLine(line);
         return line;
     }
+
+    public static string Times(this string source, int times)
+    {
+        string res = "";
+        for (int i = 0; i < times; i++)
+        {
+            res += source;
+        }
+        return res;
+    }
 }
 
 

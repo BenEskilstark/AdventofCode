@@ -136,9 +136,9 @@ public class Grid<T>
     {
         List<Coord> neighbors = [
             (X: coord.X - 1, coord.Y),
-            (X: coord.X + 1, coord.Y),
             (coord.X, Y: coord.Y - 1),
-            (coord.X, Y: coord.Y + 1)
+            (coord.X, Y: coord.Y + 1),
+            (X: coord.X + 1, coord.Y),
         ];
         if (diagonals)
         {
