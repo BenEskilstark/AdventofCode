@@ -67,3 +67,8 @@ Day 22:
 Day 23:
     - Finding all cliques of size 3 in a graph
     - Finding the largest clique in a graph
+Day 24:
+    - Simulating a circuit to see what the result is
+    - Finding the 4 pairs of incorrect output wires that create a ripple carry adder
+Day 25:
+    - Finding keys that fit locks based on height of their columns
