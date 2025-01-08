@@ -33,7 +33,8 @@ update msg ({day, input} as model) = case msg of
 
 view : Model -> Html Msg
 view {day, result} = UI.fullscreen
-    <| UI.centeredColumn [
+    <| UI.centered
+    <| UI.column [
         UI.card (
             div [ style "width" "500px" ] 
                 [text ("Advent of Code Day: " ++ (String.fromInt day))]

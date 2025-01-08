@@ -26,8 +26,8 @@ centered content = div
     ] 
     [content]
 
-centeredColumn : List (Html msg) -> Html msg
-centeredColumn content = div 
+column : List (Html msg) -> Html msg
+column content = div 
     [
         style "display" "flex",
         style "align-items" "center",
@@ -40,14 +40,18 @@ centeredColumn content = div
 card : Html msg -> Html msg
 card content = div 
     [ 
-        style "margin" "20px", 
+        style "margin" "15px", 
         style "padding" "8px",
         style "border" "1px solid gray",
-        style "width" "fit-content",
+        style "width" "500px",
         style "border-radius" "5px",
         style "background-color" "white"
     ] 
     [ content ]
+
+
+title : String -> Html msg
+title str = h2 [ style "margin" "0", style "text-align" "center" ] [ text str ]
 
 
 type ClickType = Default | Accept | Reject
