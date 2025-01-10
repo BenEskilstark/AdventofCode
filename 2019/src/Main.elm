@@ -9,6 +9,7 @@ import Tuple exposing (..)
 
 import Day1
 import Day3
+import Day4
 
 main : Program () Model Msg
 main = Browser.element { 
@@ -19,7 +20,7 @@ type alias Model = { day: Int, input: String, result: (String, String)}
 type Msg = SetInput String | SolveDay
 
 init : () -> (Model, Cmd Msg)
-init _ = (Model 3 "" ("", ""), Cmd.none)
+init _ = (Model 4 "" ("", ""), Cmd.none)
 
 subscriptions : Model -> Sub Msg
 subscriptions _ = Sub.none 
@@ -30,6 +31,7 @@ update msg ({day, input} as model) = case msg of
     SolveDay -> case day of 
         1 -> ({ model | result = Day1.solve input}, Cmd.none)
         3 -> ({ model | result = Day3.solve input}, Cmd.none)
+        4 -> ({ model | result = Day4.solve}, Cmd.none)
         _ -> (model, Cmd.none)
     
 
