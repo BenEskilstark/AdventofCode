@@ -8,6 +8,7 @@ import Html.Events exposing (onInput)
 import Tuple exposing (..)
 
 import Day1
+import Day3
 
 main : Program () Model Msg
 main = Browser.element { 
@@ -18,7 +19,7 @@ type alias Model = { day: Int, input: String, result: (String, String)}
 type Msg = SetInput String | SolveDay
 
 init : () -> (Model, Cmd Msg)
-init _ = (Model 1 "" ("", ""), Cmd.none)
+init _ = (Model 3 "" ("", ""), Cmd.none)
 
 subscriptions : Model -> Sub Msg
 subscriptions _ = Sub.none 
@@ -28,6 +29,7 @@ update msg ({day, input} as model) = case msg of
     SetInput str -> ({ model | input = str }, Cmd.none)
     SolveDay -> case day of 
         1 -> ({ model | result = Day1.solve input}, Cmd.none)
+        3 -> ({ model | result = Day3.solve input}, Cmd.none)
         _ -> (model, Cmd.none)
     
 
