@@ -1,6 +1,6 @@
 module Day4 exposing (..)
 
-import List exposing (map, foldl)
+import List exposing (map)
 import String exposing (fromInt, split, toInt)
 import Maybe exposing (withDefault)
 

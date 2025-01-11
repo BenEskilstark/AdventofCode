@@ -2,8 +2,8 @@ module Day3 exposing (..)
 
 import String exposing (left, dropLeft, split, lines, fromInt, toInt)
 import Maybe exposing (withDefault)
-import List exposing (head, tail, filter, sortBy, concatMap, map, foldl)
-import Set exposing (intersect, toList, fromList, Set, member)
+import List exposing (head, tail, sortBy, map)
+import Set exposing (intersect, toList, fromList, Set)
 
 type alias Point = (Int, Int, Int)
 type alias Dir = {dx: Int, dy: Int, dist: Int}

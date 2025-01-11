@@ -1,7 +1,7 @@
 module Helpers exposing (..)
 
 import Regex
-import String exposing (lines, toInt, fromInt, split)
+import String exposing (toInt)
 
 nums : String -> List Int
 nums line = Regex.find numRegex line
@@ -10,4 +10,4 @@ nums line = Regex.find numRegex line
 
 numRegex : Regex.Regex
 numRegex = Maybe.withDefault Regex.never
-    <| Regex.fromString "\\d+"
+    <| Regex.fromString "-?\\d+"
