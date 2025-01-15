@@ -12,6 +12,7 @@ import Day3
 import Day4
 import Day6
 import Day7
+import Day8
 
 main : Program () Model Msg
 main = Browser.element { 
@@ -22,7 +23,7 @@ type alias Model = { day: Int, input: String, result: (String, String)}
 type Msg = SetInput String | SolveDay
 
 init : () -> (Model, Cmd Msg)
-init _ = (Model 7 "" ("", ""), Cmd.none)
+init _ = (Model 8 "" ("", ""), Cmd.none)
 
 subscriptions : Model -> Sub Msg
 subscriptions _ = Sub.none 
@@ -36,6 +37,7 @@ update msg ({day, input} as model) = case msg of
         4 -> ({ model | result = Day4.solve}, Cmd.none)
         6 -> ({ model | result = Day6.solve input}, Cmd.none)
         7 -> ({ model | result = Day7.solve input}, Cmd.none)
+        8 -> ({ model | result = Day8.solve input}, Cmd.none)
         _ -> (model, Cmd.none)
     
 
@@ -54,7 +56,7 @@ view {day, result} = UI.fullscreen
                 textarea [ onInput SetInput, style "width" "500px", style "height" "200px" ] []
             ]),
         UI.card (
-            div [ style "width" "500px" ] 
+            div [ style "width" "500px", style "white-space" "pre" ] 
             [
                 div [] [text "Part 1: ", viewPart (first result)],
                 div [style "margin-top" "6px"] [text "Part 2: ", viewPart (second result)]
