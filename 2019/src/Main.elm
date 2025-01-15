@@ -23,7 +23,7 @@ type alias Model = { day: Int, input: String, result: (String, String)}
 type Msg = SetInput String | SolveDay
 
 init : () -> (Model, Cmd Msg)
-init _ = (Model 8 "" ("", ""), Cmd.none)
+init _ = (Model 9 "" ("", ""), Cmd.none)
 
 subscriptions : Model -> Sub Msg
 subscriptions _ = Sub.none 

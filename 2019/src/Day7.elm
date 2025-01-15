@@ -3,7 +3,7 @@ module Day7 exposing (..)
 import IntCode exposing (initIntCode, run, runUntilOutput, addInput, IntCode)
 
 import String exposing (fromInt)
-import List exposing (map, filter, foldl, append, head, maximum, all)
+import List exposing (map, filter, foldl, append, maximum, all)
 import Maybe exposing (withDefault)
 
 solve : String -> (String, String)
