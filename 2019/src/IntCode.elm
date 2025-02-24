@@ -35,7 +35,7 @@ addInput : Int -> IntCode -> IntCode
 addInput next ({input} as intCode) = { intCode | input = (append input [next])}
 
 setInput : List Int -> IntCode -> IntCode
-setInput nextInput ({input} as intCode) = { intCode | input = nextInput}
+setInput nextInput intCode = { intCode | input = nextInput}
 
 run : IntCode -> IntCode
 run ({isDone} as intCode) = if isDone then intCode else run (step intCode)
