@@ -2,6 +2,10 @@ package.path = package.path .. ";../?.lua"
 local utils = require("utils")
 
 local file = io.open("input.txt", "r")
+if file == nil then
+    print("couldn't find file")
+    return
+end
 local content = file:read("*a")
 file:close()
 
