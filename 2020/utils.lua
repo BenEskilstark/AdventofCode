@@ -53,6 +53,9 @@ return {
     if #lines == 1 then
       lines = splitString(str, "\r\n")
     end
+    if lines[#lines] == "" then
+      lines[#lines] = nil
+    end
     return lines
   end,
 
