@@ -7,8 +7,23 @@ local function splitString(str, delimiter)
   return result
 end
 
+local function toString(table)
+  local str = ""
+  for key, value in pairs(table) do
+    if type(value) == "string" or type(value) == "number" then
+      str = str .. key .. ": " .. value .. " "
+    elseif type(value) == "table" then
+      str = str .. toString(value)
+    end
+
+    str = str .. "\n"
+  end
+  return str
+end
+
 return {
   splitString = splitString,
+  toString = toString,
 
   charAt = function(str, i)
     return str:sub(i, i)
@@ -68,14 +83,6 @@ return {
   end,
 
   printTable = function(table)
-    local str = ""
-    for key, value in pairs(table) do
-      str = str .. key .. ": " .. value .. " "
-      if #str > 50 then
-        print(str)
-        str = ""
-      end
-    end
-    print(str)
+    print(toString(table))
   end
 }
