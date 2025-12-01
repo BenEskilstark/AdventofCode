@@ -1,12 +1,12 @@
 ﻿// global using Console = System.Diagnostics.Debug;
 
 using System.Diagnostics;
-using CurrentYear = Year2024;
+using CurrentYear = Year2025;
 
 
 Stopwatch timer = new();
 timer.Start();
-CurrentYear.Problem24.Solve();
+CurrentYear.Problem1.Solve();
 timer.Stop();
 
 // Format and display the TimeSpan value.
