@@ -5,6 +5,7 @@ using Coord = (int X, int Y);
 public static class StringExtensions
 {
     // Use like  line.GetNums().Select(n => n * n);
+    // Can't handle negatives
     public static List<int> GetNums(this string line)
     {
         return Regex.Matches(line, @"\d+")
