@@ -24,10 +24,10 @@ public class Problem1
         numTimesAtZero = 0;
         rotations.ForEach(rot =>
         {
-            int sign = rot < 0 ? -1 : 1;
+            int click = rot < 0 ? -1 : 1;
             for (int i = 0; i < Math.Abs(rot); i++)
             {
-                dialPointer += sign;
+                dialPointer += click;
                 if (dialPointer > 99) dialPointer = 0;
                 if (dialPointer < 0) dialPointer = 99;
                 if (dialPointer == 0) numTimesAtZero++;
