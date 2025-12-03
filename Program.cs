@@ -6,7 +6,7 @@ using CurrentYear = Year2025;
 
 Stopwatch timer = new();
 timer.Start();
-CurrentYear.Problem2.Solve();
+CurrentYear.Problem3.Solve();
 timer.Stop();
 
 // Format and display the TimeSpan value.
