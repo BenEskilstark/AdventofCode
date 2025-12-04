@@ -153,9 +153,9 @@ public class Grid<T>
             .Where(c => c.X >= 0 && c.Y >= 0 && c.X < Width && c.Y < Height)
             .ToList();
     }
-    public List<T> GetNeighborValues(Coord coord)
+    public List<T> GetNeighborValues(Coord coord, bool diagonals = false)
     {
-        return GetNeighbors(coord)
+        return GetNeighbors(coord, diagonals)
             .Select(At)
             .ToList();
     }
