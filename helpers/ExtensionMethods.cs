@@ -148,6 +148,11 @@ public static class LongExtensions
 
 public static class RangeExtensions
 {
+    public static bool InRange(this Range range, int value)
+    {
+        return value >= range.Start.Value && value < range.End.Value;
+    }
+
     // Use like  (0..10).ToList().Select(i => i * i);
     public static List<int> ToList(this Range range)
     {
