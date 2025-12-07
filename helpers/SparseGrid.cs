@@ -3,13 +3,21 @@ using Coord = (int X, int Y);
 public class SparseGrid<T>
 {
     public Dictionary<Coord, T?> Coordinates { get; set; } = [];
-    public T? Default { get; set; }
-
+    public T? Default
+    {
+        get => NewDefault != null ? NewDefault() : field;
+        set;
+    }
+    public Func<T>? NewDefault { get; }
 
     // Constructors
     public SparseGrid(T? d = default)
     {
         Default = d;
+    }
+    public SparseGrid(Func<T> d)
+    {
+        NewDefault = d;
     }
     public SparseGrid(List<List<T?>> g, T? d = default)
     {

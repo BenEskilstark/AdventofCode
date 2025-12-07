@@ -107,6 +107,17 @@ public static class ListExtensions
         }
         return result;
     }
+
+    public static string Join<T>(this List<T> source, string delim = "")
+    {
+        string res = "";
+        for (int i = 0; i < source.Count(); i++)
+        {
+            res += source[i]?.ToString();
+            if (i < source.Count - 1) res += delim;
+        }
+        return res;
+    }
 }
 
 
