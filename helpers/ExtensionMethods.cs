@@ -51,6 +51,12 @@ public static class EnumerableExtensions
         return source;
     }
 
+    public static IEnumerable<T> WriteLines<T>(this IEnumerable<T> source)
+    {
+        Console.WriteLine(string.Join("\n", source.ToList()));
+        return source;
+    }
+
     // See ListExtension implementation
     public static List<List<T>> Transpose<T>(this IEnumerable<List<T>> source)
     {

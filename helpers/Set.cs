@@ -30,6 +30,13 @@ public class Set<TItem> where TItem : notnull
     {
         return BackingSet.Add(item);
     }
+    public void AddMany(List<TItem> items)
+    {
+        foreach (var item in items)
+        {
+            this.Add(item);
+        }
+    }
     public bool Remove(TItem item)
     {
         return BackingSet.Remove(item);
