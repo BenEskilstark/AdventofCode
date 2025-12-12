@@ -87,6 +87,18 @@ public static class ListExtensions
         return source;
     }
 
+    // 
+    public static IEnumerable<(T, T)> Pairwise<T>(this List<T> source)
+    {
+        for (int i = 0; i < source.Count - 1; i++)
+        {
+            for (int j = i + 1; j < source.Count; j++)
+            {
+                yield return (source[i], source[j]);
+            }
+        }
+    }
+
     public static (int, int) ToTuple(this List<int> source)
     {
         return (source[0], source[1]);
