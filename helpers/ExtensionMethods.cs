@@ -126,6 +126,11 @@ public static class ListExtensions
         return result;
     }
 
+    public static List<Coord> Transpose(this List<Coord> coords)
+    {
+        return coords.Select(c => (c.Y, c.X)).ToList();
+    }
+
     public static string Join<T>(this List<T> source, string delim = "")
     {
         string res = "";
